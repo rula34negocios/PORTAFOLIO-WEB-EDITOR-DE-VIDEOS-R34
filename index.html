@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rula 34 | Video Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="navbar">
+        <div class="logo">RULA 34</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#inicio">INICIO</a></li>
+                <li><a href="#verticales">VERTICALES</a></li>
+                <li><a href="#horizontales">HORIZONTALES</a></li>
+                <li><a href="#miniaturas">MINIATURAS</a></li>
+                <li><a href="#sobre-mi">SOBRE MÍ</a></li>
+                <li><a href="#precios">PRECIOS</a></li>
+                <li><a href="#contacto">CONTACTO</a></li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="https://wa.me/tu-numero" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://twitter.com/tu-usuario" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://instagram.com/tu-usuario" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="mailto:tu-correo@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+    </header>
+
+    <!-- SECCIÓN INICIO -->
+    <section id="inicio" class="hero">
+        <h1>VIDEO EDITOR</h1>
+        <p>Videos dinámicos, con ritmo, diseñados para entretener y captar la atención, aumentar la retención y mantener al espectador mirando hasta el final.</p>
+    </section>
+
+    <!-- SECCIÓN VÍDEOS VERTICALES (CARRUSEL 3D INFINITO) -->
+    <section id="verticales" class="portfolio-section">
+        <h2>01. VÍDEOS VERTICALES</h2>
+
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+
+            <div class="video-carousel-3d" id="carouselTrack">
+                <!-- Los 10 videos se inyectarán de forma dinámica mediante JavaScript -->
+            </div>
+
+            <button class="carousel-btn next-btn" onclick="moveCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN VÍDEOS HORIZONTALES -->
+    <section id="horizontales" class="portfolio-section">
+        <h2>02. VÍDEOS HORIZONTALES</h2>
+        <div class="video-grid">
+            <div class="video-card thumbnail-card" onclick="openModal(
+                'AQUI_PON_EL_ID_REAL', 
+                'Título Video Largo', 
+                'Descripción del proyecto horizontal...', 
+                'https://youtube.com', 
+                'https://tiktok.com', 
+                'https://instagram.com', 
+                'horizontal')">
+                <img src="Videos Horizontales/miniatura-horizontal.jpg" alt="Video Horizontal Preview">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN MINIATURAS -->
+    <section id="miniaturas" class="portfolio-section">
+        <h2>03. MINIATURAS</h2>
+        <div class="video-grid">
+            <div class="video-card thumbnail-card" onclick="openModal(
+                '', 
+                'Diseño de Miniatura', 
+                'Estrategia de CTR alto y diseño llamativo para YouTube.', 
+                '#', '#', '#', 
+                'horizontal')">
+                <img src="Miniaturas/tu-miniatura.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Detalles</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi" class="content-section">
+        <h2>04. SOBRE MÍ</h2>
+        <p>Breve descripción sobre tu experiencia, software que dominas (Premiere, After Effects) y tu enfoque en retención de audiencia.</p>
+    </section>
+
+    <!-- PRECIOS -->
+    <section id="precios" class="content-section">
+        <h2>05. PRECIOS</h2>
+        <p>Detalla tus paquetes o tarifas por hora/video.</p>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="content-section">
+        <h2>06. CONTACTO</h2>
+        <p>¿Listo para trabajar juntos? Escríbeme a mi correo o redes sociales.</p>
+    </section>
+
+    <!-- VENTANA MODAL -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content" id="modalContentBox">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <div class="video-container" id="modalContainer">
+                    <iframe id="modalIframe" src="" width="100%" height="100%" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3 id="modalTitle">Título del Video</h3>
+                    <p id="modalDesc">Descripción...</p>
+                    <p class="client-links-title"><strong>Ver video en las redes del creador:</strong></p>
+                    <div class="modal-platform-links">
+                        <a href="#" id="ytLink" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                        <a href="#" id="tkLink" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+                        <a href="#" id="igLink" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT INTEGRADO -->
+    <script>
+        const verticalVideos = [{
+            id: 'M4s3d8SsVCU',
+            title: 'Bombanana Primer Nivel',
+            desc: 'Edición dinámica multicamara para Cursedfiber78 en el juego de Bombanana.',
+            src: 'Verticales/Bombanana Primer Nivel - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'hrzdL8WE-Tg',
+            title: 'Cuantas Vergs haz visto?',
+            desc: 'Edición dinámica multicamara para Cursedfiber78 en donde se capta una breve conversacion.',
+            src: 'Verticales/Cuantas Verg haz visto - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'HISLu4pza-I',
+            title: 'Partida Cassidy Overwatch2',
+            desc: 'Edición dinámica para Cursedfiber78 donde se resumio una partida en overwatch2.',
+            src: 'Verticales/Partida Cassidy Overwatch2 - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'Y4h3pzXtslk',
+            title: 'Shion Overwatch2',
+            desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.',
+            src: 'Verticales/Shion Overwatch2 - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'oXP3wfL3TfY',
+            title: 'Resumen de GamePlay Overwatch2',
+            desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.',
+            src: 'Verticales/Partida Overwatch2 - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'GxDu5RLLK3U',
+            title: 'HistoryTime Filtrado de Numero',
+            desc: 'Edición dinámica para Cursedfiber78 de HistoryTime de cuando se le filtro su numero telfonico.',
+            src: 'Verticales/HistoryTime Numero Filtrado - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'RnSAnGEH2ps',
+            title: 'Meccha Chameleon',
+            desc: 'Edición dinámica para Cursedfiber78 de partida de MecchaChameleon gameplay.',
+            src: 'Verticales/MecchaChameleon - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: '0N1PMCntavI',
+            title: 'Primera Vez en R6',
+            desc: 'Edición dinámica para Cursedfiber78 de resumen de partidas en Raimbow Six.',
+            src: 'Verticales/Primera Vez en R6 - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'fq5fWmCJdpo',
+            title: 'Record Six Seven',
+            desc: 'Video de record de six seven de Cursedfiber78.',
+            src: 'Verticales/Record 67 - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }, {
+            id: 'WNc0OXxYL1M',
+            title: 'Resumen Partida Fornite',
+            desc: 'Video de Cursedfiber78 donde se resume una partida de Fornite.',
+            src: 'Verticales/Victoria en Fornite - Cursedfiber78.mp4',
+            yt: 'https://youtube.com',
+            tk: 'https://tiktok.com',
+            ig: 'https://instagram.com'
+        }];
+
+        let currentIndex = 0;
+
+        function renderCarousel() {
+            const track = document.getElementById('carouselTrack');
+            track.innerHTML = '';
+
+            for (let offset = -2; offset <= 2; offset++) {
+                let actualIndex = (currentIndex + offset + verticalVideos.length) % verticalVideos.length;
+                let videoData = verticalVideos[actualIndex];
+
+                let card = document.createElement('div');
+                card.className = `video-card-3d pos-${offset}`;
+
+                if (offset === 0) {
+                    card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
+                    card.innerHTML = `
+                        <video src="${videoData.src}" autoplay muted loop playsinline preload="auto"></video>
+                        <div class="card-overlay">
+                            <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
+                        </div>
+                    `;
+                } else {
+                    card.onclick = () => {
+                        currentIndex = actualIndex;
+                        renderCarousel();
+                    };
+                    card.innerHTML = `
+                        <video src="${videoData.src}" muted loop playsinline preload="metadata"></video>
+                        <div class="card-overlay">
+                            <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
+                        </div>
+                    `;
+                }
+                track.appendChild(card);
+            }
+        }
+
+        function moveCarousel(direction) {
+            currentIndex = (currentIndex + direction + verticalVideos.length) % verticalVideos.length;
+            renderCarousel();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCarousel();
+        });
+
+        function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            const container = document.getElementById('modalContainer');
+
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = description;
+            document.getElementById('ytLink').href = urlYT;
+            document.getElementById('tkLink').href = urlTK;
+            document.getElementById('igLink').href = urlIG;
+
+            if (tipo === 'vertical') {
+                container.style.aspectRatio = '9/16';
+            } else {
+                container.style.aspectRatio = '16/9';
+            }
+
+            if (youtubeId && youtubeId !== '') {
+                iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&fs=1&vq=hd1080`;
+            } else {
+                iframe.src = '';
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>
