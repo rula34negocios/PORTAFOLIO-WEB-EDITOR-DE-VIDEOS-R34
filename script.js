@@ -188,6 +188,70 @@ window.onclick = function(event) {
     }
 }
 
+JavaScript
+// Array con los datos de las miniaturas
+const thumbnailsData = [
+    { src: 'Miniaturas/Miniatura1 - Cursedfiber78.jpeg', title: 'Miniatura 1 - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura1 - Nephtunie.jpg', title: 'Miniatura 1 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura2 - Cursedfiber78.jpg', title: 'Miniatura 2 - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura2 - Nephtunie.jpg', title: 'Miniatura 2 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura3 - Cursedfiber78.jpg', title: 'Miniatura 3 - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura3 - Nephtunie.jpg', title: 'Miniatura 3 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura4 - Nephtunie.jpg', title: 'Miniatura 4 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura5 - Nephtunie.jpg', title: 'Miniatura 5 - Nephtunie' }
+];
+
+let currentThumbIndex = 0;
+
+function renderThumbCarousel() {
+    const track = document.getElementById('thumbCarouselTrack');
+    if (!track) return;
+    track.innerHTML = '';
+
+    // Rango de -1 a 1 para las miniaturas
+    for (let offset = -1; offset <= 1; offset++) {
+        let actualIndex = (currentThumbIndex + offset + thumbnailsData.length) % thumbnailsData.length;
+        let thumbData = thumbnailsData[actualIndex];
+
+        let card = document.createElement('div');
+        // Usamos una clase con sufijo thumb para controlar sus dimensiones independientes
+        card.className = `video-card-3d thumb-card-3d pos-${offset}`;
+
+        if (offset === 0) {
+            card.onclick = () => openImageModal(thumbData.src);
+            card.innerHTML = `
+                <img src="${thumbData.src}" alt="${thumbData.title}">
+                <div class="card-overlay">
+                    <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
+                </div>
+            `;
+        } else {
+            card.onclick = () => {
+                currentThumbIndex = actualIndex;
+                renderThumbCarousel();
+            };
+            card.innerHTML = `
+                <img src="${thumbData.src}" alt="${thumbData.title}">
+                <div class="card-overlay">
+                    <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
+                </div>
+            `;
+        }
+        track.appendChild(card);
+    }
+}
+
+function moveThumbCarousel(direction) {
+    currentThumbIndex = (currentThumbIndex + direction + thumbnailsData.length) % thumbnailsData.length;
+    renderThumbCarousel();
+}
+
+// Asegúrate de inicializarlo al cargar la página junto con el otro carrusel
+window.addEventListener('DOMContentLoaded', () => {
+    renderCarousel();
+    renderThumbCarousel(); // <--- Añadir esta línea
+});
+
 // Función específica para mostrar SOLO la miniatura en grande sin ningún texto
 function openImageModal(imageSrc, title, description) {
     const modal = document.getElementById('videoModal');

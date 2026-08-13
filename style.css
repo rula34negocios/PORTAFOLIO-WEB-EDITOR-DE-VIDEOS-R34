@@ -421,13 +421,60 @@ section {
     background: #222;
     color: #fff;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 50px;
     text-decoration: none;
     transition: background 0.3s;
 }
 
 .modal-platform-links a:hover {
     background: #333;
+}
+
+
+/* ESTILOS ESPECÍFICOS PARA EL CARRUSEL DE MINIATURAS (16/9, RANGO -1 a 1) */
+
+.thumb-card-3d {
+    aspect-ratio: 16/9 !important;
+    border-radius: 12px;
+    background-color: #0b0b0b !important;
+}
+
+
+/* Posición central (0) */
+
+.thumb-card-3d.pos-0 {
+    flex: 0 0 520px !important;
+    transform: scale(1) translateZ(0);
+    z-index: 5;
+    filter: brightness(1);
+    border: 2px solid #6b11bc;
+    box-shadow: 0 0 25px rgba(107, 17, 188, 0.5), inset 0 0 15px rgba(50, 0, 80, 0.6);
+}
+
+.thumb-card-3d.pos-0 img {
+    filter: grayscale(0%);
+}
+
+
+/* Posiciones laterales (-1 y 1) */
+
+.thumb-card-3d.pos-1,
+.thumb-card-3d.pos--1 {
+    flex: 0 0 340px !important;
+    transform: scale(0.85) translateZ(-50px);
+    z-index: 3;
+    filter: brightness(0.5);
+}
+
+
+/* Ajuste de imagen interna de las miniaturas para que encajen perfectas en su margen 16:9 */
+
+.thumb-card-3d img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    background-color: #0b0b0b !important;
 }
 
 
