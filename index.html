@@ -14,7 +14,7 @@
 
     <!-- BARRA DE NAVEGACIÓN -->
     <header class="navbar">
-        <div class="logo">RULA 34</div>
+        <div class="logo">RULA34</div>
         <nav>
             <ul class="nav-links">
                 <li><a href="#inicio">INICIO</a></li>
@@ -36,7 +36,7 @@
 
     <!-- SECCIÓN INICIO -->
     <section id="inicio" class="hero">
-        <h1>VIDEO EDITOR</h1>
+        <h1>EDITOR DE VIDEO</h1>
         <p>Videos dinámicos, con ritmo, diseñados para entretener y captar la atención, aumentar la retención y mantener al espectador mirando hasta el final.</p>
     </section>
 
@@ -48,7 +48,6 @@
             <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
 
             <div class="video-carousel-3d" id="carouselTrack">
-                <!-- Los 10 videos se inyectarán de forma dinámica mediante JavaScript -->
             </div>
 
             <button class="carousel-btn next-btn" onclick="moveCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
@@ -73,19 +72,67 @@
         </div>
     </section>
 
-    <!-- SECCIÓN MINIATURAS -->
+    <!-- SECCION MINIATURAS -->
     <section id="miniaturas" class="portfolio-section">
         <h2>03. MINIATURAS</h2>
         <div class="video-grid">
-            <div class="video-card thumbnail-card" onclick="openModal(
-                '', 
-                'Diseño de Miniatura', 
-                'Estrategia de CTR alto y diseño llamativo para YouTube.', 
-                '#', '#', '#', 
-                'horizontal')">
-                <img src="Miniaturas/tu-miniatura.jpg" alt="Miniatura de YouTube">
-                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Detalles</span></div>
+
+            <!-- Miniatura 1 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura1 - Cursedfiber78.jpeg')">
+                <img src="Miniaturas/Miniatura1 - Cursedfiber78.jpeg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
             </div>
+
+            <!-- Miniatura 2 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura1 - Nephtunie.jpg')">
+                <img src="Miniaturas/Miniatura1 - Nephtunie.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
+            <!-- Miniatura 3 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura2 - Cursedfiber78.jpg')">
+                <img src="Miniaturas/Miniatura2 - Cursedfiber78.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
+            <!-- Miniatura 4 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura2 - Nephtunie.jpg')">
+                <img src="Miniaturas/Miniatura2 - Nephtunie.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
+            <!-- Miniatura 5 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura3 - Cursedfiber78.jpg')">
+                <img src="Miniaturas/Miniatura3 - Cursedfiber78.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
+            <!-- Miniatura 6 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura3 - Nephtunie.jpg')">
+                <img src="Miniaturas/Miniatura3 - Nephtunie.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
+            <!-- Miniatura 7 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura4 - Nephtunie.jpg')">
+                <img src="Miniaturas/Miniatura4 - Nephtunie.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
+            <!-- Miniatura 8 -->
+            <div class="video-card thumbnail-card" onclick="openImageModal(
+                'Miniaturas/Miniatura5 - Nephtunie.jpg')">
+                <img src="Miniaturas/Miniatura5 - Nephtunie.jpg" alt="Miniatura de YouTube">
+                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span></div>
+            </div>
+
         </div>
     </section>
 
@@ -113,16 +160,21 @@
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-body">
                 <div class="video-container" id="modalContainer">
-                    <iframe id="modalIframe" src="" width="100%" height="100%" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <!-- Iframe para videos -->
+                    <iframe id="modalIframe" src="" width="100%" height="100%" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;"></iframe>
+                    <!-- Imagen grande para miniaturas -->
+                    <img id="modalImage" src="" alt="Miniatura ampliada" style="width:100%; height:100%; object-fit:contain; display:none;">
                 </div>
                 <div class="video-info">
                     <h3 id="modalTitle">Título del Video</h3>
                     <p id="modalDesc">Descripción...</p>
-                    <p class="client-links-title"><strong>Ver video en las redes del creador:</strong></p>
-                    <div class="modal-platform-links">
-                        <a href="#" id="ytLink" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
-                        <a href="#" id="tkLink" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-                        <a href="#" id="igLink" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                    <div id="modalLinksContainer">
+                        <p class="client-links-title"><strong>Ver video en las redes del creador:</strong></p>
+                        <div class="modal-platform-links">
+                            <a href="#" id="ytLink" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                            <a href="#" id="tkLink" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+                            <a href="#" id="igLink" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -259,16 +311,32 @@
             renderCarousel();
         });
 
+        // Función para abrir Videos normales
         function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
             const modal = document.getElementById('videoModal');
+            const modalContentBox = document.getElementById('modalContentBox');
             const iframe = document.getElementById('modalIframe');
+            const imgElement = document.getElementById('modalImage');
             const container = document.getElementById('modalContainer');
+            const linksContainer = document.getElementById('modalLinksContainer');
+            const videoInfo = modalContentBox.querySelector('.video-info');
+
+            // Quitar clase de imagen y restaurar visibilidad de los textos
+            modalContentBox.classList.remove('image-modal-view');
+            if (videoInfo) {
+                videoInfo.style.display = 'flex';
+            }
 
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = description;
             document.getElementById('ytLink').href = urlYT;
             document.getElementById('tkLink').href = urlTK;
             document.getElementById('igLink').href = urlIG;
+
+            imgElement.style.display = 'none';
+            imgElement.src = '';
+            iframe.style.display = 'block';
+            linksContainer.style.display = 'block';
 
             if (tipo === 'vertical') {
                 container.style.aspectRatio = '9/16';
@@ -285,10 +353,46 @@
             modal.style.display = 'flex';
         }
 
+        // Función específica para mostrar SOLO la miniatura en grande sin texto
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById('videoModal');
+            const modalContentBox = document.getElementById('modalContentBox');
+            const iframe = document.getElementById('modalIframe');
+            const imgElement = document.getElementById('modalImage');
+            const container = document.getElementById('modalContainer');
+            const linksContainer = document.getElementById('modalLinksContainer');
+            const videoInfo = modalContentBox.querySelector('.video-info');
+
+            // Añadir clase para expandir el cuadro del modal
+            modalContentBox.classList.add('image-modal-view');
+
+            // Ocultar por completo la sección de texto lateral
+            if (videoInfo) {
+                videoInfo.style.display = 'none';
+            }
+
+            // Aspecto 16:9 para la miniatura
+            container.style.aspectRatio = '16/9';
+
+            // Ocultar iframe y mostrar únicamente la imagen
+            iframe.style.display = 'none';
+            iframe.src = '';
+            imgElement.style.display = 'block';
+            imgElement.src = imageSrc;
+
+            // Asegurar que los enlaces estén ocultos
+            linksContainer.style.display = 'none';
+
+            modal.style.display = 'flex';
+        }
+
         function closeModal() {
             const modal = document.getElementById('videoModal');
             const iframe = document.getElementById('modalIframe');
+            const imgElement = document.getElementById('modalImage');
+
             iframe.src = '';
+            imgElement.src = '';
             modal.style.display = 'none';
         }
 

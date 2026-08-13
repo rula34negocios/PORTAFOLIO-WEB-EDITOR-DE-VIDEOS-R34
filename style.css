@@ -429,3 +429,27 @@ section {
 .modal-platform-links a:hover {
     background: #333;
 }
+
+
+/* MODAL EXCLUSIVO PARA MINIATURAS (ANCHO MÁXIMO) */
+
+.modal-content.image-modal-view {
+    max-width: 1200px !important;
+    width: 90% !important;
+    padding: 20px !important;
+}
+
+.modal-content.image-modal-view .modal-body {
+    display: block !important;
+    margin-top: 10px !important;
+}
+
+.modal-content.image-modal-view .video-container {
+    width: 100% !important;
+    max-height: 85vh;
+}
+
+.modal-content.image-modal-view .video-info {
+    display: none !important;
+    /* Oculta títulos y textos molestos */
+}

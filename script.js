@@ -1,4 +1,4 @@
-// Array con los 10 videos verticales del portafolio[cite: 16]
+// Array con los 10 videos verticales del portafolio
 const verticalVideos = [{
         id: 'M4s3d8SsVCU',
         title: 'Bombanana Primer Nivel',
@@ -91,13 +91,13 @@ const verticalVideos = [{
     }
 ];
 
-let currentIndex = 0; // Índice central (0)[cite: 16]
+let currentIndex = 0; // Índice central (0)
 
 function renderCarousel() {
     const track = document.getElementById('carouselTrack');
     track.innerHTML = '';
 
-    // Mostrar un rango de -2 a 2 centrado en currentIndex[cite: 16]
+    // Mostrar un rango de -2 a 2 centrado en currentIndex
     for (let offset = -2; offset <= 2; offset++) {
         let actualIndex = (currentIndex + offset + verticalVideos.length) % verticalVideos.length;
         let videoData = verticalVideos[actualIndex];
@@ -132,21 +132,32 @@ function moveCarousel(direction) {
     renderCarousel();
 }
 
-// Inicializar el carrusel al cargar la página[cite: 16]
+// Inicializar el carrusel al cargar la página
 window.addEventListener('DOMContentLoaded', () => {
     renderCarousel();
 });
 
 function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     const modal = document.getElementById('videoModal');
+    const modalContentBox = document.getElementById('modalContentBox');
     const iframe = document.getElementById('modalIframe');
+    const imgElement = document.getElementById('modalImage');
     const container = document.getElementById('modalContainer');
+    const linksContainer = document.getElementById('modalLinksContainer');
+
+    // Quitar clase de imagen para que regrese al layout de video normal
+    modalContentBox.classList.remove('image-modal-view');
 
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalDesc').innerText = description;
     document.getElementById('ytLink').href = urlYT;
     document.getElementById('tkLink').href = urlTK;
     document.getElementById('igLink').href = urlIG;
+
+    imgElement.style.display = 'none';
+    imgElement.src = '';
+    iframe.style.display = 'block';
+    linksContainer.style.display = 'block';
 
     if (tipo === 'vertical') {
         container.style.aspectRatio = '9/16';
@@ -155,7 +166,6 @@ function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     }
 
     if (youtubeId && youtubeId !== '') {
-        // Optimización aplicada: Se añaden parámetros a YouTube para mejorar fluidez y evitar tirones (bajas fps)
         iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&fs=1&vq=hd1080`;
     } else {
         iframe.src = '';
@@ -176,4 +186,37 @@ window.onclick = function(event) {
     if (event.target == modal) {
         closeModal();
     }
+}
+
+// Función específica para mostrar SOLO la miniatura en grande sin ningún texto
+function openImageModal(imageSrc, title, description) {
+    const modal = document.getElementById('videoModal');
+    const modalContentBox = document.getElementById('modalContentBox');
+    const iframe = document.getElementById('modalIframe');
+    const imgElement = document.getElementById('modalImage');
+    const container = document.getElementById('modalContainer');
+    const linksContainer = document.getElementById('modalLinksContainer');
+    const videoInfo = modalContentBox.querySelector('.video-info');
+
+    // Añadir clase para expandir el cuadro del modal
+    modalContentBox.classList.add('image-modal-view');
+
+    // Ocultar por completo la sección de texto lateral
+    if (videoInfo) {
+        videoInfo.style.display = 'none';
+    }
+
+    // Configurar aspecto 16:9 para la miniatura
+    container.style.aspectRatio = '16/9';
+
+    // Ocultar iframe y mostrar únicamente la imagen
+    iframe.style.display = 'none';
+    iframe.src = '';
+    imgElement.style.display = 'block';
+    imgElement.src = imageSrc;
+
+    // Asegurar que los enlaces también estén ocultos
+    linksContainer.style.display = 'none';
+
+    modal.style.display = 'flex';
 }
