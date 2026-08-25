@@ -130,8 +130,11 @@
         </div>
     </div>
 
-    <!-- SCRIPT INTEGRADO -->
+    <!-- SCRIPT CORREGIDO E INTEGRADO DIRECTAMENTE -->
     <script>
+        // ==========================================
+        // DATOS DEL PORTAFOLIO
+        // ==========================================
         const verticalVideos = [{
             id: 'M4s3d8SsVCU',
             title: 'Bombanana Primer Nivel',
@@ -214,7 +217,6 @@
             ig: 'https://instagram.com'
         }];
 
-        // Miniaturas para el nuevo carrusel
         const thumbnailsData = [{
             src: 'Miniaturas/Miniatura1 - Cursedfiber78.jpeg',
             title: 'Miniatura 1 - Cursedfiber78'
@@ -241,92 +243,156 @@
             title: 'Miniatura 5 - Nephtunie'
         }];
 
+        // ==========================================
+        // ESTADO GLOBAL DE LOS CARRUSELES
+        // ==========================================
         let currentIndex = 0;
         let currentThumbIndex = 0;
+        const PRELOAD_RANGE = 4;
 
-        function renderCarousel() {
-            const track = document.getElementById('carouselTrack');
-            track.innerHTML = '';
+        // ==========================================
+        // INICIALIZACIÓN: Crear el DOM una sola vez
+        // ==========================================
+        function initCarousels() {
+            const vTrack = document.getElementById('carouselTrack');
+            const tTrack = document.getElementById('thumbCarouselTrack');
 
-            for (let offset = -2; offset <= 2; offset++) {
-                let actualIndex = (currentIndex + offset + verticalVideos.length) % verticalVideos.length;
-                let videoData = verticalVideos[actualIndex];
-
-                let card = document.createElement('div');
-                card.className = `video-card-3d pos-${offset}`;
-
-                if (offset === 0) {
-                    card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
+            if (vTrack) {
+                vTrack.innerHTML = '';
+                verticalVideos.forEach((videoData, index) => {
+                    const card = document.createElement('div');
+                    card.id = `v-card-${index}`;
+                    card.className = 'video-card-3d pos-hidden';
                     card.innerHTML = `
-                        <video src="${videoData.src}" autoplay muted loop playsinline preload="auto"></video>
+                        <video src="${videoData.src}" muted loop playsinline preload="auto"></video>
                         <div class="card-overlay">
                             <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
                         </div>
                     `;
-                } else {
-                    card.onclick = () => {
-                        currentIndex = actualIndex;
-                        renderCarousel();
-                    };
-                    card.innerHTML = `
-                        <video src="${videoData.src}" muted loop playsinline preload="metadata"></video>
-                        <div class="card-overlay">
-                            <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
-                        </div>
-                    `;
-                }
-                track.appendChild(card);
+                    vTrack.appendChild(card);
+                });
             }
+
+            if (tTrack) {
+                tTrack.innerHTML = '';
+                thumbnailsData.forEach((thumbData, index) => {
+                    const card = document.createElement('div');
+                    card.id = `t-card-${index}`;
+                    card.className = 'video-card-3d thumb-card-3d pos-hidden';
+                    card.innerHTML = `
+                        <img src="${thumbData.src}" alt="${thumbData.title}" loading="eager">
+                        <div class="card-overlay">
+                            <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
+                        </div>
+                    `;
+                    tTrack.appendChild(card);
+                });
+            }
+
+            updateCarousel();
+            updateThumbCarousel();
+        }
+
+        // ==========================================
+        // LÓGICA DE ANIMACIÓN (VIDEOS VERTICALES)
+        // ==========================================
+        function updateCarousel() {
+            const total = verticalVideos.length;
+
+            verticalVideos.forEach((videoData, index) => {
+                const card = document.getElementById(`v-card-${index}`);
+                if (!card) return;
+
+                const video = card.querySelector('video');
+                let offset = index - currentIndex;
+
+                if (offset > total / 2) offset -= total;
+                if (offset < -total / 2) offset += total;
+
+                card.className = 'video-card-3d';
+
+                if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
+                    if (offset >= -2 && offset <= 2) {
+                        card.classList.add(`pos-${offset}`);
+                    } else {
+                        card.classList.add('pos-hidden');
+                    }
+
+                    if (offset === 0) {
+                        video.play().catch(() => {});
+                        card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
+                    } else {
+                        video.pause();
+                        card.onclick = () => {
+                            currentIndex = (currentIndex + offset + total) % total;
+                            updateCarousel();
+                        };
+                    }
+                } else {
+                    card.classList.add('pos-hidden');
+                    video.pause();
+                }
+            });
         }
 
         function moveCarousel(direction) {
             currentIndex = (currentIndex + direction + verticalVideos.length) % verticalVideos.length;
-            renderCarousel();
+            updateCarousel();
         }
 
-        // Renderizado del carrusel de miniaturas (-1 a 1)
-        function renderThumbCarousel() {
-            const track = document.getElementById('thumbCarouselTrack');
-            if (!track) return;
-            track.innerHTML = '';
+        // ==========================================
+        // LÓGICA DE ANIMACIÓN (MINIATURAS HORIZONTALES)
+        // ==========================================
+        function updateThumbCarousel() {
+            const total = thumbnailsData.length;
 
-            for (let offset = -1; offset <= 1; offset++) {
-                let actualIndex = (currentThumbIndex + offset + thumbnailsData.length) % thumbnailsData.length;
-                let thumbData = thumbnailsData[actualIndex];
+            thumbnailsData.forEach((thumbData, index) => {
+                const card = document.getElementById(`t-card-${index}`);
+                if (!card) return;
 
-                let card = document.createElement('div');
-                card.className = `video-card-3d thumb-card-3d pos-${offset}`;
+                let offset = index - currentThumbIndex;
 
-                card.onclick = () => {
-                    if (offset === 0) {
-                        openImageModal(thumbData.src);
+                if (offset > total / 2) offset -= total;
+                if (offset < -total / 2) offset += total;
+
+                card.className = 'video-card-3d thumb-card-3d';
+
+                if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
+                    if (offset >= -1 && offset <= 1) {
+                        card.classList.add(`pos-${offset}`);
                     } else {
-                        currentThumbIndex = actualIndex;
-                        renderThumbCarousel();
+                        card.classList.add('pos-hidden');
                     }
-                };
 
-                card.innerHTML = `
-                    <img src="${thumbData.src}" alt="${thumbData.title}">
-                    <div class="card-overlay">
-                        <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
-                    </div>
-                `;
-                track.appendChild(card);
-            }
+                    if (offset === 0) {
+                        card.onclick = () => openImageModal(thumbData.src);
+                    } else {
+                        card.onclick = () => {
+                            currentThumbIndex = (currentThumbIndex + offset + total) % total;
+                            updateThumbCarousel();
+                        };
+                    }
+                } else {
+                    card.classList.add('pos-hidden');
+                }
+            });
         }
 
         function moveThumbCarousel(direction) {
             currentThumbIndex = (currentThumbIndex + direction + thumbnailsData.length) % thumbnailsData.length;
-            renderThumbCarousel();
+            updateThumbCarousel();
         }
 
+        // ==========================================
+        // INICIO Y EVENTOS
+        // ==========================================
         window.addEventListener('DOMContentLoaded', () => {
-            renderCarousel();
-            renderThumbCarousel();
+            initCarousels();
         });
 
-        // Función para abrir Videos normales
+        // ==========================================
+        // MODALES
+        // ==========================================
         function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
             const modal = document.getElementById('videoModal');
             const modalContentBox = document.getElementById('modalContentBox');
@@ -337,9 +403,7 @@
             const videoInfo = modalContentBox.querySelector('.video-info');
 
             modalContentBox.classList.remove('image-modal-view');
-            if (videoInfo) {
-                videoInfo.style.display = 'flex';
-            }
+            if (videoInfo) videoInfo.style.display = 'flex';
 
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = description;
@@ -352,11 +416,7 @@
             iframe.style.display = 'block';
             linksContainer.style.display = 'block';
 
-            if (tipo === 'vertical') {
-                container.style.aspectRatio = '9/16';
-            } else {
-                container.style.aspectRatio = '16/9';
-            }
+            container.style.aspectRatio = tipo === 'vertical' ? '9/16' : '16/9';
 
             if (youtubeId && youtubeId !== '') {
                 iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&fs=1&vq=hd1080`;
@@ -367,7 +427,6 @@
             modal.style.display = 'flex';
         }
 
-        // Función específica para mostrar SOLO la miniatura en grande sin texto
         function openImageModal(imageSrc) {
             const modal = document.getElementById('videoModal');
             const modalContentBox = document.getElementById('modalContentBox');
@@ -378,10 +437,7 @@
             const videoInfo = modalContentBox.querySelector('.video-info');
 
             modalContentBox.classList.add('image-modal-view');
-
-            if (videoInfo) {
-                videoInfo.style.display = 'none';
-            }
+            if (videoInfo) videoInfo.style.display = 'none';
 
             container.style.aspectRatio = '16/9';
 
@@ -399,7 +455,6 @@
             const modal = document.getElementById('videoModal');
             const iframe = document.getElementById('modalIframe');
             const imgElement = document.getElementById('modalImage');
-
             iframe.src = '';
             imgElement.src = '';
             modal.style.display = 'none';

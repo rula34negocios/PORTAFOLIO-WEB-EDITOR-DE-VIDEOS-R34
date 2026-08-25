@@ -91,52 +91,176 @@ const verticalVideos = [{
     }
 ];
 
-let currentIndex = 0; // Índice central (0)
+// ==========================================
+// ESTADO GLOBAL DE LOS CARRUSELES
+// ==========================================
+let currentIndex = 0;
+let currentThumbIndex = 0;
+const PRELOAD_RANGE = 4; // Elementos cargados a cada lado (visible y no visible)
 
-function renderCarousel() {
-    const track = document.getElementById('carouselTrack');
-    track.innerHTML = '';
+// ==========================================
+// INICIALIZACIÓN: Crear el DOM una sola vez
+// ==========================================
+function initCarousels() {
+    const vTrack = document.getElementById('carouselTrack');
+    const tTrack = document.getElementById('thumbCarouselTrack');
 
-    // Mostrar un rango de -2 a 2 centrado en currentIndex
-    for (let offset = -2; offset <= 2; offset++) {
-        let actualIndex = (currentIndex + offset + verticalVideos.length) % verticalVideos.length;
-        let videoData = verticalVideos[actualIndex];
-
-        let card = document.createElement('div');
-        card.className = `video-card-3d pos-${offset}`;
-
-        if (offset === 0) {
-            // Elemento central: con reproducción automática (autoplay) y a todo color
-            card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
+    if (vTrack) {
+        vTrack.innerHTML = '';
+        verticalVideos.forEach((videoData, index) => {
+            const card = document.createElement('div');
+            card.id = `v-card-${index}`;
+            // Todas inician ocultas hasta que la actualización las mueva
+            card.className = 'video-card-3d pos-hidden';
             card.innerHTML = `
-                <video src="${videoData.src}" autoplay muted loop playsinline></video>
-                <div class="card-overlay"><span>Ver Video</span></div>
+                <video src="${videoData.src}" muted loop playsinline preload="auto"></video>
+                <div class="card-overlay">
+                    <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
+                </div>
             `;
-        } else {
-            // Elementos laterales (-2, -1, 1, 2): se ven estáticos (sin autoplay) para corregir la visibilidad y mejorar el rendimiento
-            card.onclick = () => {
-                currentIndex = actualIndex;
-                renderCarousel();
-            };
-            card.innerHTML = `
-                <video src="${videoData.src}" muted loop playsinline></video>
-                <div class="card-overlay"><span>Ver Video</span></div>
-            `;
-        }
-        track.appendChild(card);
+            vTrack.appendChild(card);
+        });
     }
+
+    if (tTrack) {
+        tTrack.innerHTML = '';
+        thumbnailsData.forEach((thumbData, index) => {
+            const card = document.createElement('div');
+            card.id = `t-card-${index}`;
+            card.className = 'video-card-3d thumb-card-3d pos-hidden';
+            card.innerHTML = `
+                <img src="${thumbData.src}" alt="${thumbData.title}" loading="eager">
+                <div class="card-overlay">
+                    <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
+                </div>
+            `;
+            tTrack.appendChild(card);
+        });
+    }
+
+    // Dibujar el estado inicial con animaciones
+    updateCarousel();
+    updateThumbCarousel();
+}
+
+// ==========================================
+// LÓGICA DE ANIMACIÓN (VIDEOS VERTICALES)
+// ==========================================
+function updateCarousel() {
+    const total = verticalVideos.length;
+
+    verticalVideos.forEach((videoData, index) => {
+        const card = document.getElementById(`v-card-${index}`);
+        if (!card) return;
+
+        const video = card.querySelector('video');
+
+        // Calculamos la distancia relativa (offset) respetando la circularidad
+        let offset = index - currentIndex;
+
+        // Magia para hacer la cinta infinita: si la distancia es mayor a la mitad, 
+        // lo empujamos al otro lado virtualmente.
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        // Limpiamos clases previas
+        card.className = 'video-card-3d';
+
+        // Manejo de la ventana visible y de precarga (+/- 4 elementos totales en DOM activo)
+        if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
+
+            // Asignamos las clases visuales de CSS (que usan absolute y translateX)
+            // Las posiciones -2, -1, 0, 1, 2 son visibles. Las posiciones 3, 4, -3, -4 están ocultas pero listas en el DOM.
+            if (offset >= -2 && offset <= 2) {
+                card.classList.add(`pos-${offset}`);
+            } else {
+                card.classList.add('pos-hidden'); // Precargado, pero fuera de cámara
+            }
+
+            // Lógica de interacción y reproducción
+            if (offset === 0) {
+                // Elemento central: reproduce
+                video.play().catch(() => {});
+                card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
+            } else {
+                // Elementos laterales: pausa y click para navegar
+                video.pause();
+                card.onclick = () => {
+                    // Calculamos hacia dónde mover para animar suavemente
+                    currentIndex = (currentIndex + offset + total) % total;
+                    updateCarousel();
+                };
+            }
+        } else {
+            // Fuera de rango totalmente: se reciclan/ocultan sin transición brusca
+            card.classList.add('pos-hidden');
+            video.pause();
+        }
+    });
 }
 
 function moveCarousel(direction) {
     currentIndex = (currentIndex + direction + verticalVideos.length) % verticalVideos.length;
-    renderCarousel();
+    updateCarousel();
 }
 
-// Inicializar el carrusel al cargar la página
+// ==========================================
+// LÓGICA DE ANIMACIÓN (MINIATURAS HORIZONTALES)
+// ==========================================
+function updateThumbCarousel() {
+    const total = thumbnailsData.length;
+
+    thumbnailsData.forEach((thumbData, index) => {
+        const card = document.getElementById(`t-card-${index}`);
+        if (!card) return;
+
+        let offset = index - currentThumbIndex;
+
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        // Importante mantener la clase base de proporciones 16:9
+        card.className = 'video-card-3d thumb-card-3d';
+
+        // Mismo rango de precarga para las imágenes
+        if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
+
+            // Las miniaturas solo muestran -1, 0, 1. El resto se oculta pero se precarga.
+            if (offset >= -1 && offset <= 1) {
+                card.classList.add(`pos-${offset}`);
+            } else {
+                card.classList.add('pos-hidden');
+            }
+
+            if (offset === 0) {
+                card.onclick = () => openImageModal(thumbData.src);
+            } else {
+                card.onclick = () => {
+                    currentThumbIndex = (currentThumbIndex + offset + total) % total;
+                    updateThumbCarousel();
+                };
+            }
+        } else {
+            card.classList.add('pos-hidden');
+        }
+    });
+}
+
+function moveThumbCarousel(direction) {
+    currentThumbIndex = (currentThumbIndex + direction + thumbnailsData.length) % thumbnailsData.length;
+    updateThumbCarousel();
+}
+
+// ==========================================
+// INICIO Y EVENTOS
+// ==========================================
 window.addEventListener('DOMContentLoaded', () => {
-    renderCarousel();
+    initCarousels();
 });
 
+// ==========================================
+// MODALES (Misma lógica previa, sin cambios)
+// ==========================================
 function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     const modal = document.getElementById('videoModal');
     const modalContentBox = document.getElementById('modalContentBox');
@@ -144,9 +268,10 @@ function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     const imgElement = document.getElementById('modalImage');
     const container = document.getElementById('modalContainer');
     const linksContainer = document.getElementById('modalLinksContainer');
+    const videoInfo = modalContentBox.querySelector('.video-info');
 
-    // Quitar clase de imagen para que regrese al layout de video normal
     modalContentBox.classList.remove('image-modal-view');
+    if (videoInfo) videoInfo.style.display = 'flex';
 
     document.getElementById('modalTitle').innerText = title;
     document.getElementById('modalDesc').innerText = description;
@@ -159,11 +284,7 @@ function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     iframe.style.display = 'block';
     linksContainer.style.display = 'block';
 
-    if (tipo === 'vertical') {
-        container.style.aspectRatio = '9/16';
-    } else {
-        container.style.aspectRatio = '16/9';
-    }
+    container.style.aspectRatio = tipo === 'vertical' ? '9/16' : '16/9';
 
     if (youtubeId && youtubeId !== '') {
         iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&fs=1&vq=hd1080`;
@@ -174,86 +295,7 @@ function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     modal.style.display = 'flex';
 }
 
-function closeModal() {
-    const modal = document.getElementById('videoModal');
-    const iframe = document.getElementById('modalIframe');
-    iframe.src = '';
-    modal.style.display = 'none';
-}
-
-window.onclick = function(event) {
-    const modal = document.getElementById('videoModal');
-    if (event.target == modal) {
-        closeModal();
-    }
-}
-
-JavaScript
-// Array con los datos de las miniaturas
-const thumbnailsData = [
-    { src: 'Miniaturas/Miniatura1 - Cursedfiber78.jpeg', title: 'Miniatura 1 - Cursedfiber78' },
-    { src: 'Miniaturas/Miniatura1 - Nephtunie.jpg', title: 'Miniatura 1 - Nephtunie' },
-    { src: 'Miniaturas/Miniatura2 - Cursedfiber78.jpg', title: 'Miniatura 2 - Cursedfiber78' },
-    { src: 'Miniaturas/Miniatura2 - Nephtunie.jpg', title: 'Miniatura 2 - Nephtunie' },
-    { src: 'Miniaturas/Miniatura3 - Cursedfiber78.jpg', title: 'Miniatura 3 - Cursedfiber78' },
-    { src: 'Miniaturas/Miniatura3 - Nephtunie.jpg', title: 'Miniatura 3 - Nephtunie' },
-    { src: 'Miniaturas/Miniatura4 - Nephtunie.jpg', title: 'Miniatura 4 - Nephtunie' },
-    { src: 'Miniaturas/Miniatura5 - Nephtunie.jpg', title: 'Miniatura 5 - Nephtunie' }
-];
-
-let currentThumbIndex = 0;
-
-function renderThumbCarousel() {
-    const track = document.getElementById('thumbCarouselTrack');
-    if (!track) return;
-    track.innerHTML = '';
-
-    // Rango de -1 a 1 para las miniaturas
-    for (let offset = -1; offset <= 1; offset++) {
-        let actualIndex = (currentThumbIndex + offset + thumbnailsData.length) % thumbnailsData.length;
-        let thumbData = thumbnailsData[actualIndex];
-
-        let card = document.createElement('div');
-        // Usamos una clase con sufijo thumb para controlar sus dimensiones independientes
-        card.className = `video-card-3d thumb-card-3d pos-${offset}`;
-
-        if (offset === 0) {
-            card.onclick = () => openImageModal(thumbData.src);
-            card.innerHTML = `
-                <img src="${thumbData.src}" alt="${thumbData.title}">
-                <div class="card-overlay">
-                    <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
-                </div>
-            `;
-        } else {
-            card.onclick = () => {
-                currentThumbIndex = actualIndex;
-                renderThumbCarousel();
-            };
-            card.innerHTML = `
-                <img src="${thumbData.src}" alt="${thumbData.title}">
-                <div class="card-overlay">
-                    <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
-                </div>
-            `;
-        }
-        track.appendChild(card);
-    }
-}
-
-function moveThumbCarousel(direction) {
-    currentThumbIndex = (currentThumbIndex + direction + thumbnailsData.length) % thumbnailsData.length;
-    renderThumbCarousel();
-}
-
-// Asegúrate de inicializarlo al cargar la página junto con el otro carrusel
-window.addEventListener('DOMContentLoaded', () => {
-    renderCarousel();
-    renderThumbCarousel(); // <--- Añadir esta línea
-});
-
-// Función específica para mostrar SOLO la miniatura en grande sin ningún texto
-function openImageModal(imageSrc, title, description) {
+function openImageModal(imageSrc) {
     const modal = document.getElementById('videoModal');
     const modalContentBox = document.getElementById('modalContentBox');
     const iframe = document.getElementById('modalIframe');
@@ -262,25 +304,33 @@ function openImageModal(imageSrc, title, description) {
     const linksContainer = document.getElementById('modalLinksContainer');
     const videoInfo = modalContentBox.querySelector('.video-info');
 
-    // Añadir clase para expandir el cuadro del modal
     modalContentBox.classList.add('image-modal-view');
+    if (videoInfo) videoInfo.style.display = 'none';
 
-    // Ocultar por completo la sección de texto lateral
-    if (videoInfo) {
-        videoInfo.style.display = 'none';
-    }
-
-    // Configurar aspecto 16:9 para la miniatura
     container.style.aspectRatio = '16/9';
 
-    // Ocultar iframe y mostrar únicamente la imagen
     iframe.style.display = 'none';
     iframe.src = '';
     imgElement.style.display = 'block';
     imgElement.src = imageSrc;
 
-    // Asegurar que los enlaces también estén ocultos
     linksContainer.style.display = 'none';
 
     modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('modalIframe');
+    const imgElement = document.getElementById('modalImage');
+    iframe.src = '';
+    imgElement.src = '';
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('videoModal');
+    if (event.target == modal) {
+        closeModal();
+    }
 }

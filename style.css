@@ -113,7 +113,13 @@ section {
 }
 
 
-/* ESTILOS DEL CARRUSEL 3D / CINTA INFINITA (-2 a 2) */
+/* ======================================================== */
+
+
+/* ESTILOS DEL CARRUSEL 3D / CINTA INFINITA (-2 a 2)       */
+
+
+/* ======================================================== */
 
 .carousel-container {
     position: relative;
@@ -127,28 +133,35 @@ section {
 }
 
 .video-carousel-3d {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+    position: relative;
     width: 100%;
+    height: 520px;
     perspective: 1000px;
 }
 
 .video-card-3d {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 280px;
+    height: 498px;
+    /* Proporción 9:16 exacta para videos verticales */
+    margin-left: -140px;
+    /* Centrado perfecto (mitad del ancho) */
+    margin-top: -249px;
+    /* Centrado perfecto (mitad del alto) */
     cursor: pointer;
     overflow: hidden;
     border-radius: 12px;
-    aspect-ratio: 9/16;
     background: #151515;
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    /* ANIMACIÓN SUAVE Y FLUIDA AL CAMBIAR COORDENADAS */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease, opacity 0.6s ease, box-shadow 0.6s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    /* Borde sutil para tarjetas secundarias */
     border: 1px solid #222;
 }
 
-.video-card-3d video {
+.video-card-3d video,
+.video-card-3d img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -157,38 +170,59 @@ section {
 }
 
 
-/* Posiciones relativas para el efecto de profundidad (-2, -1, 0, 1, 2) */
+/* POSICIONES DEL CARRUSEL (Usando coordenadas exactas en X y Z) */
 
 .video-card-3d.pos-0 {
-    flex: 0 0 280px;
-    transform: scale(1) translateZ(0);
+    transform: translateX(0) translateZ(0) scale(1);
     z-index: 5;
     filter: brightness(1);
-    /* MORADO METÁLICO NEGRO E INTENSO CUANDO ESTÁ EN POSICIÓN 0 */
     border: 2px solid #6b11bc;
     box-shadow: 0 0 25px rgba(107, 17, 188, 0.5), inset 0 0 15px rgba(50, 0, 80, 0.6);
+    opacity: 1;
 }
 
-.video-card-3d.pos-0 video {
+.video-card-3d.pos-0 video,
+.video-card-3d.pos-0 img {
     filter: grayscale(0%);
 }
 
-.video-card-3d.pos-1,
-.video-card-3d.pos--1 {
-    flex: 0 0 220px;
-    transform: scale(0.85) translateZ(-50px);
-    z-index: 3;
+.video-card-3d.pos-1 {
+    transform: translateX(190px) translateZ(-50px) scale(0.85);
+    z-index: 4;
     filter: brightness(0.5);
+    opacity: 1;
 }
 
-.video-card-3d.pos-2,
-.video-card-3d.pos--2 {
-    flex: 0 0 170px;
-    transform: scale(0.7) translateZ(-100px);
-    z-index: 1;
+.video-card-3d.pos--1 {
+    transform: translateX(-190px) translateZ(-50px) scale(0.85);
+    z-index: 4;
+    filter: brightness(0.5);
+    opacity: 1;
+}
+
+.video-card-3d.pos-2 {
+    transform: translateX(330px) translateZ(-100px) scale(0.7);
+    z-index: 3;
     filter: brightness(0.25);
     opacity: 0.6;
 }
+
+.video-card-3d.pos--2 {
+    transform: translateX(-330px) translateZ(-100px) scale(0.7);
+    z-index: 3;
+    filter: brightness(0.25);
+    opacity: 0.6;
+}
+
+.video-card-3d.pos-hidden {
+    transform: translateX(0) translateZ(-300px) scale(0.4);
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ESTÉTICA DEL BOTÓN "VER VIDEO" */
 
 .card-overlay {
     position: absolute;
@@ -208,9 +242,6 @@ section {
 .video-card:hover .card-overlay {
     opacity: 1;
 }
-
-
-/* ESTÉTICA MEJORADA DEL BOTÓN "VER VIDEO" */
 
 .play-pill {
     background: linear-gradient(135deg, #4d0a8a, #1a022e);
@@ -241,7 +272,7 @@ section {
 }
 
 
-/* Botones de navegación del carrusel */
+/* BOTONES DE NAVEGACIÓN DEL CARRUSEL */
 
 .carousel-btn {
     position: absolute;
@@ -276,7 +307,13 @@ section {
 }
 
 
-/* GRILLA NORMAL (Para horizontales y miniaturas) */
+/* ======================================================== */
+
+
+/* GRILLA NORMAL (Para horizontales)                        */
+
+
+/* ======================================================== */
 
 .video-grid {
     display: grid;
@@ -329,7 +366,13 @@ section {
 }
 
 
-/* VENTANA MODAL */
+/* ======================================================== */
+
+
+/* VENTANA MODAL COMPLETA                                   */
+
+
+/* ======================================================== */
 
 .modal {
     display: none;
@@ -431,43 +474,51 @@ section {
 }
 
 
-/* ESTILOS ESPECÍFICOS PARA EL CARRUSEL DE MINIATURAS (16/9, RANGO -1 a 1) */
+/* ======================================================== */
+
+
+/* ESTILOS ESPECÍFICOS PARA EL CARRUSEL DE MINIATURAS (16:9)*/
+
+
+/* ======================================================== */
 
 .thumb-card-3d {
-    aspect-ratio: 16/9 !important;
-    border-radius: 12px;
+    width: 520px !important;
+    height: 292px !important;
+    /* Proporción 16:9 exacta */
+    margin-left: -260px !important;
+    /* Mitad del ancho para centrar absoluto */
+    margin-top: -146px !important;
+    /* Mitad del alto para centrar absoluto */
     background-color: #0b0b0b !important;
 }
 
-
-/* Posición central (0) */
-
 .thumb-card-3d.pos-0 {
-    flex: 0 0 520px !important;
-    transform: scale(1) translateZ(0);
+    transform: translateX(0) translateZ(0) scale(1);
     z-index: 5;
     filter: brightness(1);
     border: 2px solid #6b11bc;
     box-shadow: 0 0 25px rgba(107, 17, 188, 0.5), inset 0 0 15px rgba(50, 0, 80, 0.6);
+    opacity: 1;
 }
 
 .thumb-card-3d.pos-0 img {
     filter: grayscale(0%);
 }
 
-
-/* Posiciones laterales (-1 y 1) */
-
-.thumb-card-3d.pos-1,
-.thumb-card-3d.pos--1 {
-    flex: 0 0 340px !important;
-    transform: scale(0.85) translateZ(-50px);
+.thumb-card-3d.pos-1 {
+    transform: translateX(280px) translateZ(-50px) scale(0.85);
     z-index: 3;
     filter: brightness(0.5);
+    opacity: 1;
 }
 
-
-/* Ajuste de imagen interna de las miniaturas para que encajen perfectas en su margen 16:9 */
+.thumb-card-3d.pos--1 {
+    transform: translateX(-280px) translateZ(-50px) scale(0.85);
+    z-index: 3;
+    filter: brightness(0.5);
+    opacity: 1;
+}
 
 .thumb-card-3d img {
     width: 100% !important;
@@ -498,5 +549,4 @@ section {
 
 .modal-content.image-modal-view .video-info {
     display: none !important;
-    /* Oculta títulos y textos molestos */
 }
