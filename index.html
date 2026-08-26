@@ -22,10 +22,11 @@
 
     <!-- BARRA DE NAVEGACIÓN -->
     <header class="navbar">
-        <div class="logo">RULA34</div>
+        <!-- Convertimos el logo en el enlace al inicio -->
+        <a href="#inicio" class="logo">RULA34</a>
         <nav>
             <ul class="nav-links">
-                <li><a href="#inicio">INICIO</a></li>
+                <!-- Se eliminó el <li> de INICIO -->
                 <li><a href="#verticales">VERTICALES</a></li>
                 <li><a href="#horizontales">HORIZONTALES</a></li>
                 <li><a href="#miniaturas">MINIATURAS</a></li>
@@ -44,8 +45,35 @@
 
     <!-- SECCIÓN INICIO -->
     <section id="inicio" class="hero">
-        <h1>EDITOR DE VIDEO</h1>
-        <p>Videos dinámicos, con ritmo, diseñados para entretener y captar la atención, aumentar la retención y mantener al espectador mirando hasta el final.</p>
+        <div class="hero-content">
+            <!-- Título en una sola línea -->
+            <h1>EDITOR DE VIDEOS</h1>
+
+            <!-- Línea divisoria central con degradado y punto -->
+            <div class="hero-divider">
+                <span class="line left-line"></span>
+                <span class="dot"></span>
+                <span class="line right-line"></span>
+            </div>
+
+            <p class="hero-subtitle">Videos dinámicos, con ritmo, diseñados para entretener y captar la atención, aumentar la retención y mantener al espectador mirando hasta el final.</p>
+
+            <!-- Iconos de Software -->
+            <div class="hero-software-icons">
+                <img src="https://img.icons8.com/color/96/adobe-premiere-pro--v1.png" alt="Premiere Pro" class="software-icon" title="Premiere Pro">
+                <img src="https://img.icons8.com/color/96/adobe-after-effects--v1.png" alt="After Effects" class="software-icon" title="After Effects">
+                <img src="https://img.icons8.com/color/96/adobe-photoshop--v1.png" alt="Photoshop" class="software-icon" title="Photoshop">
+            </div>
+        </div>
+
+        <!-- Indicador de desplazamiento (Scroll) -->
+        <div class="scroll-indicator">
+            <span>DESLIZA PARA EXPLORAR</span>
+            <div class="scroll-line">
+                <span class="vertical-line"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
     </section>
 
     <!-- SECCIÓN VÍDEOS VERTICALES (CARRUSEL 3D INFINITO) -->

@@ -28,9 +28,37 @@ body {
     overflow: hidden;
     pointer-events: none;
     background: #000000;
-    background-image: radial-gradient(white, rgba(255, 255, 255, .2) 1px, transparent 1px), radial-gradient(white, rgba(255, 255, 255, .1) 1px, transparent 1px), radial-gradient(white, rgba(255, 255, 255, .3) 2px, transparent 2px);
-    background-size: 550px 550px, 350px 350px, 250px 250px;
-    background-position: 0 0, 40px 60px, 130px 270px;
+    /* Se eliminó el radial-gradient y background-size para evitar la cuadrícula */
+}
+
+
+/* ESTRELLAS ESTÁTICAS GENERADAS POR JS (NUEVO) */
+
+.static-star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    /* Un brillo sutil para que luzcan reales */
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    animation: twinkle infinite ease-in-out;
+}
+
+
+/* Animación de destello/parpadeo */
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.1;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0.1;
+        transform: scale(0.8);
+    }
 }
 
 
@@ -130,6 +158,13 @@ body {
 .logo {
     font-weight: bold;
     letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+    transition: text-shadow 0.3s ease;
+}
+
+.logo:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .nav-links {
@@ -178,7 +213,6 @@ section {
     justify-content: center;
 }
 
-.hero,
 .portfolio-section,
 .content-section {
     max-width: 1200px;
@@ -188,14 +222,160 @@ section {
     width: 100%;
 }
 
+
+/* ======================================================== */
+
+
+/* SECCIÓN INICIO (HERO) - ESTILO CINEMATOGRÁFICO           */
+
+
+/* ======================================================== */
+
 .hero {
-    align-items: flex-start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    margin-top: -50px;
 }
 
 .hero h1 {
-    font-size: 4rem;
-    letter-spacing: -1px;
-    margin-bottom: 10px;
+    font-size: clamp(2.5rem, 5vw, 6rem);
+    /* Ajustado para que quepa mejor en móvil */
+    letter-spacing: 4px;
+    margin-bottom: 5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    white-space: nowrap;
+    /* Fuerza a que se mantenga en una sola línea */
+}
+
+
+/* Divisor con degradado y punto brillante conectado */
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 15px 0 30px 0;
+}
+
+.hero-divider .line {
+    flex-grow: 1;
+    height: 1.5px;
+}
+
+.hero-divider .left-line {
+    background: linear-gradient(to right, transparent, #fff);
+}
+
+.hero-divider .right-line {
+    background: linear-gradient(to left, transparent, #fff);
+}
+
+.hero-divider .dot {
+    width: 7px;
+    height: 7px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0;
+    /* Sin margen para que las líneas choquen exactamente con el punto */
+    box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.6);
+    z-index: 1;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: #ccc;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+
+/* --- Iconos de Software --- */
+
+.hero-software-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.software-icon {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+    cursor: default;
+}
+
+.software-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+
+
+/* --- Indicador de Deslizar --- */
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+.scroll-indicator span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.scroll-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-line .vertical-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, #fff);
+}
+
+.scroll-line .dot {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-top: 0px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+    .hero-divider {
+        width: 100%;
+    }
 }
 
 
@@ -228,7 +408,7 @@ section {
 /* ======================================================== */
 
 
-/* ESTILOS DE LA NUEVA SECCIÓN "SOBRE MÍ"    */
+/* ESTILOS DE LA SECCIÓN "SOBRE MÍ"                         */
 
 
 /* ======================================================== */

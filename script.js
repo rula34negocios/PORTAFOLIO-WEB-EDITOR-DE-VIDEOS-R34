@@ -302,8 +302,45 @@ window.onclick = function(event) {
 }
 
 // ==========================================
+// GENERADOR DE ESTRELLAS ALEATORIAS
+// ==========================================
+function generateStars() {
+    const container = document.querySelector('.galaxy-background');
+    const numStars = 150; // Cantidad de estrellas (puedes subirlo a 200 o bajarlo a 100)
+
+    for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('static-star');
+
+        // Posición aleatoria en la pantalla (0% a 100%)
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+
+        // Tamaño aleatorio para dar profundidad (entre 1px y 2.5px)
+        const size = Math.random() * 1.5 + 1;
+
+        // ANIMACIÓN DESINCRONIZADA
+        // Cada estrella parpadea a diferente velocidad (entre 2s y 5s)
+        const duration = Math.random() * 3 + 2;
+        // Cada estrella empieza su parpadeo en diferente momento (retraso de 0s a 5s)
+        const delay = Math.random() * 5;
+
+        // Aplicar estilos calculados
+        star.style.left = `${x}vw`;
+        star.style.top = `${y}vh`;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.animationDuration = `${duration}s`;
+        star.style.animationDelay = `${delay}s`;
+
+        container.appendChild(star);
+    }
+}
+
+// ==========================================
 // INICIALIZACIÓN GLOBAL AL CARGAR LA PÁGINA
 // ==========================================
 window.addEventListener('DOMContentLoaded', () => {
     initCarousels();
+    generateStars();
 });
