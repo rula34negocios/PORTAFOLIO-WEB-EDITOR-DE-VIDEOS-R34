@@ -1,94 +1,36 @@
-// Array con los 10 videos verticales del portafolio
-const verticalVideos = [{
-        id: 'M4s3d8SsVCU',
-        title: 'Bombanana Primer Nivel',
-        desc: 'Edición dinámica multicamara para Cursedfiber78 en el juego de Bombanana.',
-        src: 'Verticales/Bombanana Primer Nivel - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'hrzdL8WE-Tg',
-        title: 'Cuantas Vergs haz visto?',
-        desc: 'Edición dinámica multicamara para Cursedfiber78 en donde se capta una breve conversacion.',
-        src: 'Verticales/Cuantas Verg haz visto - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'HISLu4pza-I',
-        title: 'Partida Cassidy Overwatch2',
-        desc: 'Edición dinámica para Cursedfiber78 donde se resumio una partida en overwatch2.',
-        src: 'Verticales/Partida Cassidy Overwatch2 - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'Y4h3pzXtslk',
-        title: 'Shion Overwatch2',
-        desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.',
-        src: 'Verticales/Shion Overwatch2 - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'oXP3wfL3TfY',
-        title: 'Resumen de GamePlay Overwatch2',
-        desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.',
-        src: 'Verticales/Partida Overwatch2 - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'GxDu5RLLK3U',
-        title: 'HistoryTime Filtrado de Numero',
-        desc: 'Edición dinámica para Cursedfiber78 de HistoryTime de cuando se le filtro su numero telfonico.',
-        src: 'Verticales/HistoryTime Numero Filtrado - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'RnSAnGEH2ps',
-        title: 'Meccha Chameleon',
-        desc: 'Edición dinámica para Cursedfiber78 de partida de MecchaChameleon gameplay.',
-        src: 'Verticales/MecchaChameleon - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: '0N1PMCntavI',
-        title: 'Primera Vez en R6',
-        desc: 'Edición dinámica para Cursedfiber78 de resumen de partidas en Raimbow Six.',
-        src: 'Verticales/Primera Vez en R6 - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'fq5fWmCJdpo',
-        title: 'Record Six Seven',
-        desc: 'Video de record de six seven de Cursedfiber78.',
-        src: 'Verticales/Record 67 - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    },
-    {
-        id: 'WNc0OXxYL1M',
-        title: 'Resumen Partida Fornite',
-        desc: 'Video de Cursedfiber78 donde se resume una partida de Fornite.',
-        src: 'Verticales/Victoria en Fornite - Cursedfiber78.mp4',
-        yt: 'https://youtube.com',
-        tk: 'https://tiktok.com',
-        ig: 'https://instagram.com'
-    }
+// ==========================================
+// DATOS DEL PORTAFOLIO Y COLABORACIONES
+// ==========================================
+const verticalVideos = [
+    { id: 'M4s3d8SsVCU', title: 'Bombanana Primer Nivel', desc: 'Edición dinámica multicamara para Cursedfiber78 en el juego de Bombanana.', src: 'Verticales/Bombanana Primer Nivel - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'hrzdL8WE-Tg', title: 'Cuantas Vergs haz visto?', desc: 'Edición dinámica multicamara para Cursedfiber78 en donde se capta una breve conversacion.', src: 'Verticales/Cuantas Verg haz visto - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'HISLu4pza-I', title: 'Partida Cassidy Overwatch2', desc: 'Edición dinámica para Cursedfiber78 donde se resumio una partida en overwatch2.', src: 'Verticales/Partida Cassidy Overwatch2 - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'Y4h3pzXtslk', title: 'Shion Overwatch2', desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.', src: 'Verticales/Shion Overwatch2 - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'oXP3wfL3TfY', title: 'Resumen de GamePlay Overwatch2', desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.', src: 'Verticales/Partida Overwatch2 - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'GxDu5RLLK3U', title: 'HistoryTime Filtrado de Numero', desc: 'Edición dinámica para Cursedfiber78 de HistoryTime de cuando se le filtro su numero telfonico.', src: 'Verticales/HistoryTime Numero Filtrado - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'RnSAnGEH2ps', title: 'Meccha Chameleon', desc: 'Edición dinámica para Cursedfiber78 de partida de MecchaChameleon gameplay.', src: 'Verticales/MecchaChameleon - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: '0N1PMCntavI', title: 'Primera Vez en R6', desc: 'Edición dinámica para Cursedfiber78 de resumen de partidas en Raimbow Six.', src: 'Verticales/Primera Vez en R6 - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'fq5fWmCJdpo', title: 'Record Six Seven', desc: 'Video de record de six seven de Cursedfiber78.', src: 'Verticales/Record 67 - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' },
+    { id: 'WNc0OXxYL1M', title: 'Resumen Partida Fornite', desc: 'Video de Cursedfiber78 donde se resume una partida de Fornite.', src: 'Verticales/Victoria en Fornite - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' }
+];
+
+const thumbnailsData = [
+    { src: 'Miniaturas/Miniatura1 - Cursedfiber78.jpeg', title: 'Miniatura 1 - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura1 - Nephtunie.jpg', title: 'Miniatura 1 - Nephtunie' },
+    { src: 'Miniaturas/Gamplay GOW.jpg', title: 'Miniatura GOW - Cursedfiber78' },
+    { src: 'Miniaturas/IRL con Regina edit.jpg', title: 'Miniatura IRL con Regina - Cursedfiber78' },
+    { src: 'Miniaturas/Ropa Nueva.jpg', title: 'Miniatura Ropa Nueva - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura2 - Cursedfiber78.jpg', title: 'Miniatura 2 - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura2 - Nephtunie.jpg', title: 'Miniatura 2 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura3 - Cursedfiber78.jpg', title: 'Miniatura 3 - Cursedfiber78' },
+    { src: 'Miniaturas/Miniatura3 - Nephtunie.jpg', title: 'Miniatura 3 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura4 - Nephtunie.jpg', title: 'Miniatura 4 - Nephtunie' },
+    { src: 'Miniaturas/Miniatura5 - Nephtunie.jpg', title: 'Miniatura 5 - Nephtunie' },
+];
+
+// Datos de colaboradores con su nombre de streamer
+const collaborationsData = [
+    { name: 'Cursedfiber78', streamer: 'Cursedfiber78', avatar: 'Colaboradores/65f6b207-6fb6-48f1-a4dc-4f2e5586.jpg', twitch: 'https://www.twitch.tv/cursedfiber78' }
 ];
 
 // ==========================================
@@ -96,21 +38,22 @@ const verticalVideos = [{
 // ==========================================
 let currentIndex = 0;
 let currentThumbIndex = 0;
-const PRELOAD_RANGE = 4; // Elementos cargados a cada lado (visible y no visible)
+let currentCollabIndex = 0;
+const PRELOAD_RANGE = 4;
 
 // ==========================================
-// INICIALIZACIÓN: Crear el DOM una sola vez
+// INICIALIZACIÓN DE LOS DOMs DEL CARRUSEL
 // ==========================================
 function initCarousels() {
     const vTrack = document.getElementById('carouselTrack');
     const tTrack = document.getElementById('thumbCarouselTrack');
+    const cTrack = document.getElementById('collabCarouselTrack');
 
     if (vTrack) {
         vTrack.innerHTML = '';
         verticalVideos.forEach((videoData, index) => {
             const card = document.createElement('div');
             card.id = `v-card-${index}`;
-            // Todas inician ocultas hasta que la actualización las mueva
             card.className = 'video-card-3d pos-hidden';
             card.innerHTML = `
                 <video src="${videoData.src}" muted loop playsinline preload="auto"></video>
@@ -138,9 +81,28 @@ function initCarousels() {
         });
     }
 
-    // Dibujar el estado inicial con animaciones
+    if (cTrack) {
+        cTrack.innerHTML = '';
+        collaborationsData.forEach((collab, index) => {
+            const card = document.createElement('div');
+            card.id = `c-card-${index}`;
+            card.className = 'video-card-3d collab-card-3d pos-hidden';
+            card.innerHTML = `
+                <div class="collab-avatar-wrapper">
+                    <img src="${collab.avatar}" alt="${collab.name}">
+                </div>
+                <span class="collab-streamer-name">${collab.streamer}</span>
+                <div class="card-overlay">
+                    <a href="${collab.twitch}" target="_blank" class="play-pill twitch-pill"><i class="fa-brands fa-twitch"></i> Visitar Twitch</a>
+                </div>
+            `;
+            cTrack.appendChild(card);
+        });
+    }
+
     updateCarousel();
     updateThumbCarousel();
+    updateCollabCarousel();
 }
 
 // ==========================================
@@ -148,51 +110,32 @@ function initCarousels() {
 // ==========================================
 function updateCarousel() {
     const total = verticalVideos.length;
-
     verticalVideos.forEach((videoData, index) => {
         const card = document.getElementById(`v-card-${index}`);
         if (!card) return;
-
         const video = card.querySelector('video');
-
-        // Calculamos la distancia relativa (offset) respetando la circularidad
         let offset = index - currentIndex;
-
-        // Magia para hacer la cinta infinita: si la distancia es mayor a la mitad, 
-        // lo empujamos al otro lado virtualmente.
         if (offset > total / 2) offset -= total;
         if (offset < -total / 2) offset += total;
 
-        // Limpiamos clases previas
         card.className = 'video-card-3d';
-
-        // Manejo de la ventana visible y de precarga (+/- 4 elementos totales en DOM activo)
         if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
-
-            // Asignamos las clases visuales de CSS (que usan absolute y translateX)
-            // Las posiciones -2, -1, 0, 1, 2 son visibles. Las posiciones 3, 4, -3, -4 están ocultas pero listas en el DOM.
             if (offset >= -2 && offset <= 2) {
                 card.classList.add(`pos-${offset}`);
             } else {
-                card.classList.add('pos-hidden'); // Precargado, pero fuera de cámara
+                card.classList.add('pos-hidden');
             }
-
-            // Lógica de interacción y reproducción
             if (offset === 0) {
-                // Elemento central: reproduce
                 video.play().catch(() => {});
                 card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
             } else {
-                // Elementos laterales: pausa y click para navegar
                 video.pause();
                 card.onclick = () => {
-                    // Calculamos hacia dónde mover para animar suavemente
                     currentIndex = (currentIndex + offset + total) % total;
                     updateCarousel();
                 };
             }
         } else {
-            // Fuera de rango totalmente: se reciclan/ocultan sin transición brusca
             card.classList.add('pos-hidden');
             video.pause();
         }
@@ -209,29 +152,20 @@ function moveCarousel(direction) {
 // ==========================================
 function updateThumbCarousel() {
     const total = thumbnailsData.length;
-
     thumbnailsData.forEach((thumbData, index) => {
         const card = document.getElementById(`t-card-${index}`);
         if (!card) return;
-
         let offset = index - currentThumbIndex;
-
         if (offset > total / 2) offset -= total;
         if (offset < -total / 2) offset += total;
 
-        // Importante mantener la clase base de proporciones 16:9
         card.className = 'video-card-3d thumb-card-3d';
-
-        // Mismo rango de precarga para las imágenes
         if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
-
-            // Las miniaturas solo muestran -1, 0, 1. El resto se oculta pero se precarga.
             if (offset >= -1 && offset <= 1) {
                 card.classList.add(`pos-${offset}`);
             } else {
                 card.classList.add('pos-hidden');
             }
-
             if (offset === 0) {
                 card.onclick = () => openImageModal(thumbData.src);
             } else {
@@ -252,14 +186,45 @@ function moveThumbCarousel(direction) {
 }
 
 // ==========================================
-// INICIO Y EVENTOS
+// LÓGICA DE ANIMACIÓN (COLABORACIONES)
 // ==========================================
-window.addEventListener('DOMContentLoaded', () => {
-    initCarousels();
-});
+function updateCollabCarousel() {
+    const total = collaborationsData.length;
+    collaborationsData.forEach((collab, index) => {
+        const card = document.getElementById(`c-card-${index}`);
+        if (!card) return;
+        let offset = index - currentCollabIndex;
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        card.className = 'video-card-3d collab-card-3d';
+        if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
+            if (offset >= -1 && offset <= 1) {
+                card.classList.add(`pos-${offset}`);
+            } else {
+                card.classList.add('pos-hidden');
+            }
+            if (offset !== 0) {
+                card.onclick = () => {
+                    currentCollabIndex = (currentCollabIndex + offset + total) % total;
+                    updateCollabCarousel();
+                };
+            } else {
+                card.onclick = null;
+            }
+        } else {
+            card.classList.add('pos-hidden');
+        }
+    });
+}
+
+function moveCollabCarousel(direction) {
+    currentCollabIndex = (currentCollabIndex + direction + collaborationsData.length) % collaborationsData.length;
+    updateCollabCarousel();
+}
 
 // ==========================================
-// MODALES (Misma lógica previa, sin cambios)
+// MODALES
 // ==========================================
 function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
     const modal = document.getElementById('videoModal');
@@ -323,6 +288,7 @@ function closeModal() {
     const modal = document.getElementById('videoModal');
     const iframe = document.getElementById('modalIframe');
     const imgElement = document.getElementById('modalImage');
+
     iframe.src = '';
     imgElement.src = '';
     modal.style.display = 'none';
@@ -335,25 +301,9 @@ window.onclick = function(event) {
     }
 }
 
-// Función para crear el universo de estrellas
-function createGalaxy() {
-    const container = document.querySelector('.galaxy-background');
-    if (!container) return;
-
-    // Generar 150 estrellas estáticas repartidas por toda la pantalla
-    for (let i = 0; i < 150; i++) {
-        let star = document.createElement('div');
-        star.className = 'star';
-
-        star.style.left = Math.random() * 100 + 'vw';
-        star.style.top = Math.random() * 100 + 'vh';
-
-        let size = Math.random() * 2 + 1; // Tamaños entre 1px y 3px
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-
-        star.style.animationDuration = (Math.random() * 3 + 1) + 's';
-
-        container.appendChild(star);
-    }
-}
+// ==========================================
+// INICIALIZACIÓN GLOBAL AL CARGAR LA PÁGINA
+// ==========================================
+window.addEventListener('DOMContentLoaded', () => {
+    initCarousels();
+});

@@ -14,7 +14,6 @@
 
     <!-- EFECTO GALAXIA DE FONDO -->
     <div class="galaxy-background">
-        <!-- Las estrellas normales se generarán con JS, aquí solo ponemos las fugaces -->
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
@@ -33,6 +32,7 @@
                 <li><a href="#sobre-mi">SOBRE MÍ</a></li>
                 <li><a href="#precios">PRECIOS</a></li>
                 <li><a href="#contacto">CONTACTO</a></li>
+                <li><a href="#colaboraciones">COLABORACIONES</a></li>
             </ul>
         </nav>
         <div class="social-icons">
@@ -50,7 +50,7 @@
 
     <!-- SECCIÓN VÍDEOS VERTICALES (CARRUSEL 3D INFINITO) -->
     <section id="verticales" class="portfolio-section">
-        <h2>01. VÍDEOS VERTICALES</h2>
+        <h2>VÍDEOS VERTICALES</h2>
 
         <div class="carousel-container">
             <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -64,25 +64,15 @@
 
     <!-- SECCIÓN VÍDEOS HORIZONTALES -->
     <section id="horizontales" class="portfolio-section">
-        <h2>02. VÍDEOS HORIZONTALES</h2>
-        <div class="video-grid">
-            <div class="video-card thumbnail-card" onclick="openModal(
-                'AQUI_PON_EL_ID_REAL', 
-                'Título Video Largo', 
-                'Descripción del proyecto horizontal...', 
-                'https://youtube.com', 
-                'https://tiktok.com', 
-                'https://instagram.com', 
-                'horizontal')">
-                <img src="Videos Horizontales/miniatura-horizontal.jpg" alt="Video Horizontal Preview">
-                <div class="card-overlay"><span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span></div>
-            </div>
+        <h2>VÍDEOS HORIZONTALES</h2>
+        <div class="empty-notice-container">
+            <p class="empty-notice-text">De momento no cuento con vídeos horizontales trabajados.</p>
         </div>
     </section>
 
-    <!-- SECCION MINIATURAS (CARRUSEL -1, 0, 1) -->
+    <!-- SECCION MINIATURAS -->
     <section id="miniaturas" class="portfolio-section">
-        <h2>03. MINIATURAS</h2>
+        <h2>MINIATURAS</h2>
 
         <div class="carousel-container">
             <button class="carousel-btn prev-btn" onclick="moveThumbCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -96,20 +86,161 @@
 
     <!-- SOBRE MÍ -->
     <section id="sobre-mi" class="content-section">
-        <h2>04. SOBRE MÍ</h2>
-        <p>Breve descripción sobre tu experiencia, software que dominas (Premiere, After Effects) y tu enfoque en retención de audiencia.</p>
+        <h2>SOBRE MÍ</h2>
+        <div class="about-container">
+            <div class="about-left-box">
+                <div class="about-tag-item">PASIÓN</div>
+                <div class="about-tag-item">DISCIPLINA <span class="cross">✕</span></div>
+                <div class="about-tag-item active-tag">CREATIVIDAD <span class="cross">✕</span></div>
+            </div>
+
+            <div class="about-center-text">
+                <p class="about-intro">Soy <strong>rula34</strong>, videoeditor profesional especializado en contenido digital, streaming y entretenimiento para plataformas.</p>
+                <p>Edito cualquier tipo de videos, directos enteros de Twitch o Kick —desde el VOD resuelto con el material que me pases, o editando cámara y gameplay por separado. También hago intros, outros y miniaturas para videos horizontales o verticales.</p>
+                <p>Trabajo con <strong>Premiere Pro, After Effects y Photoshop</strong>, con nociones de motion graphics. Cada proyecto se cotiza según el material y el alcance para asegurar la máxima retención de audiencia.</p>
+            </div>
+
+            <div class="about-right-services">
+                <span class="services-title">LO QUE HAGO</span>
+                <div class="service-row"><i class="fa-solid fa-scissors"></i> Edición</div>
+                <div class="service-row"><i class="fa-solid fa-video"></i> Grabación</div>
+                <div class="service-row"><i class="fa-regular fa-image"></i> Miniaturas</div>
+                <div class="service-row active-service"><i class="fa-solid fa-bolt"></i> Intros</div>
+                <div class="service-row"><i class="fa-solid fa-wand-magic-sparkles"></i> Motion graphics</div>
+            </div>
+        </div>
     </section>
 
-    <!-- PRECIOS -->
+    <!-- SECCIÓN PRECIOS -->
     <section id="precios" class="content-section">
-        <h2>05. PRECIOS</h2>
-        <p>Detalla tus paquetes o tarifas por hora/video.</p>
+        <div class="prices-header-container">
+            <h2>PRECIOS</h2>
+            <div class="currency-selector">USD · ARS</div>
+        </div>
+
+        <p class="prices-main-desc">
+            Precios aproximados en dólares (USD) y por <strong>video individual</strong>. El valor final depende mucho de la <strong>duración del bruto</strong> y de varios factores (por ejemplo, el tamaño del canal), así que cada proyecto se cotiza aparte.
+            Si se pacta un <strong>volumen de videos por mes</strong> o un <strong>trabajo a largo plazo</strong>, los precios <strong>bajan bastante</strong>.
+        </p>
+
+        <!-- SUBTÍTULOS / CARACTERÍSTICAS DE CADA EDICIÓN -->
+        <div class="prices-tiers-legend">
+            <span class="legend-subtitle">QUÉ INCLUYE CADA EDICIÓN · SOBRE UN VÍDEO DE ~10 MIN</span>
+            <div class="tiers-grid-legend">
+                <div class="tier-legend-item">
+                    <span class="dot white-dot"></span>
+                    <div>
+                        <strong>Básica</strong>
+                        <p>Recortes, zooms y subtítulos.</p>
+                    </div>
+                </div>
+                <div class="tier-legend-item">
+                    <span class="dot red-dot"></span>
+                    <div>
+                        <strong>Intermedia</strong>
+                        <p>Lo anterior + efectos visuales y diseño sonoro.</p>
+                    </div>
+                </div>
+                <div class="tier-legend-item">
+                    <span class="dot yellow-dot"></span>
+                    <div>
+                        <strong>Compleja</strong>
+                        <p>Lo anterior + motion graphics, rotoscopia, corrección de color y 3D.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLAS DE PRECIOS (VERTICAL Y HORIZONTAL) -->
+        <div class="pricing-tables-wrapper">
+            <!-- Formato Vertical -->
+            <div class="price-card-box">
+                <div class="price-table-header">
+                    <h3>FORMATO VERTICAL</h3>
+                    <span class="table-sub-col">POR VIDEO</span>
+                </div>
+                <div class="price-row-item">
+                    <div class="row-label"><span class="dot white-dot"></span> Edición Básica</div>
+                    <div class="row-value">$5 / $8</div>
+                </div>
+                <div class="price-row-item">
+                    <div class="row-label"><span class="dot red-dot"></span> Edición Intermedia</div>
+                    <div class="row-value">$10 / $15</div>
+                </div>
+                <div class="price-row-item">
+                    <div class="row-label"><span class="dot yellow-dot"></span> Edición Compleja</div>
+                    <div class="row-value">$20 / $25</div>
+                </div>
+            </div>
+
+            <!-- Formato Horizontal -->
+            <div class="price-card-box">
+                <div class="price-table-header">
+                    <h3>FORMATO HORIZONTAL</h3>
+                    <div class="horizontal-cols-sub">
+                        <span>POR 10 MIN</span>
+                        <span>POR MINUTO</span>
+                    </div>
+                </div>
+                <div class="price-row-item">
+                    <div class="row-label"><span class="dot white-dot"></span> Edición Básica</div>
+                    <div class="row-value-group">
+                        <span class="main-price">$15</span>
+                        <span class="sub-price">· $10/min</span>
+                    </div>
+                </div>
+                <div class="price-row-item">
+                    <div class="row-label"><span class="dot red-dot"></span> Edición Intermedia</div>
+                    <div class="row-value-group">
+                        <span class="main-price">$20</span>
+                        <span class="sub-price">· $15/min</span>
+                    </div>
+                </div>
+                <div class="price-row-item">
+                    <div class="row-label"><span class="dot yellow-dot"></span> Edición Compleja</div>
+                    <div class="row-value-group">
+                        <span class="main-price">$40</span>
+                        <span class="sub-price">· $30/min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- CONTACTO -->
+    <!-- SECCIÓN CONTACTO (CON 3 BOTONES GRANDES) -->
     <section id="contacto" class="content-section">
-        <h2>06. CONTACTO</h2>
-        <p>¿Listo para trabajar juntos? Escríbeme a mi correo o redes sociales.</p>
+        <h2>CONTACTO</h2>
+        <p class="contact-desc">¿Listo para trabajar juntos? Escríbeme directamente por mis canales oficiales o correo electrónico:</p>
+
+        <div class="contact-buttons-container">
+            <a href="https://x.com/rula34fx" target="_blank" class="contact-btn twitter-btn">
+                <i class="fa-brands fa-twitter"></i>
+                <span>Twitter / X</span>
+            </a>
+            <a href="https://www.instagram.com/rula34fx" target="_blank" class="contact-btn instagram-btn">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="mailto:rula34negocios@gmail.com" class="contact-btn email-btn">
+                <i class="fa-regular fa-envelope"></i>
+                <span>Correo</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 07. COLABORACIONES (CARRUSEL DE STREAMERS/CREADORES) -->
+    <section id="colaboraciones" class="portfolio-section">
+        <h2>COLABORACIONES</h2>
+        <p class="collab-desc">Streamers y creadores de contenido con los que he colaborado:</p>
+
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="moveCollabCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+
+            <div class="video-carousel-3d" id="collabCarouselTrack">
+            </div>
+
+            <button class="carousel-btn next-btn" onclick="moveCollabCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
     </section>
 
     <!-- VENTANA MODAL -->
@@ -118,9 +249,7 @@
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <div class="modal-body">
                 <div class="video-container" id="modalContainer">
-                    <!-- Iframe para videos -->
                     <iframe id="modalIframe" src="" width="100%" height="100%" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;"></iframe>
-                    <!-- Imagen grande para miniaturas -->
                     <img id="modalImage" src="" alt="Miniatura ampliada" style="width:100%; height:100%; object-fit:contain; display:none;">
                 </div>
                 <div class="video-info">
@@ -139,343 +268,8 @@
         </div>
     </div>
 
-    <!-- SCRIPT CORREGIDO E INTEGRADO DIRECTAMENTE -->
-    <script>
-        // ==========================================
-        // DATOS DEL PORTAFOLIO
-        // ==========================================
-        const verticalVideos = [{
-            id: 'M4s3d8SsVCU',
-            title: 'Bombanana Primer Nivel',
-            desc: 'Edición dinámica multicamara para Cursedfiber78 en el juego de Bombanana.',
-            src: 'Verticales/Bombanana Primer Nivel - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'hrzdL8WE-Tg',
-            title: 'Cuantas Vergs haz visto?',
-            desc: 'Edición dinámica multicamara para Cursedfiber78 en donde se capta una breve conversacion.',
-            src: 'Verticales/Cuantas Verg haz visto - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'HISLu4pza-I',
-            title: 'Partida Cassidy Overwatch2',
-            desc: 'Edición dinámica para Cursedfiber78 donde se resumio una partida en overwatch2.',
-            src: 'Verticales/Partida Cassidy Overwatch2 - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'Y4h3pzXtslk',
-            title: 'Shion Overwatch2',
-            desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.',
-            src: 'Verticales/Shion Overwatch2 - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'oXP3wfL3TfY',
-            title: 'Resumen de GamePlay Overwatch2',
-            desc: 'Edición dinámica para Cursedfiber78 donde juega una partida con el nuevo dps shion en overwatch2.',
-            src: 'Verticales/Partida Overwatch2 - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'GxDu5RLLK3U',
-            title: 'HistoryTime Filtrado de Numero',
-            desc: 'Edición dinámica para Cursedfiber78 de HistoryTime de cuando se le filtro su numero telfonico.',
-            src: 'Verticales/HistoryTime Numero Filtrado - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'RnSAnGEH2ps',
-            title: 'Meccha Chameleon',
-            desc: 'Edición dinámica para Cursedfiber78 de partida de MecchaChameleon gameplay.',
-            src: 'Verticales/MecchaChameleon - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: '0N1PMCntavI',
-            title: 'Primera Vez en R6',
-            desc: 'Edición dinámica para Cursedfiber78 de resumen de partidas en Raimbow Six.',
-            src: 'Verticales/Primera Vez en R6 - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'fq5fWmCJdpo',
-            title: 'Record Six Seven',
-            desc: 'Video de record de six seven de Cursedfiber78.',
-            src: 'Verticales/Record 67 - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }, {
-            id: 'WNc0OXxYL1M',
-            title: 'Resumen Partida Fornite',
-            desc: 'Video de Cursedfiber78 donde se resume una partida de Fornite.',
-            src: 'Verticales/Victoria en Fornite - Cursedfiber78.mp4',
-            yt: 'https://youtube.com',
-            tk: 'https://tiktok.com',
-            ig: 'https://instagram.com'
-        }];
-
-        const thumbnailsData = [{
-            src: 'Miniaturas/Miniatura1 - Cursedfiber78.jpeg',
-            title: 'Miniatura 1 - Cursedfiber78'
-        }, {
-            src: 'Miniaturas/Miniatura1 - Nephtunie.jpg',
-            title: 'Miniatura 1 - Nephtunie'
-        }, {
-            src: 'Miniaturas/Miniatura2 - Cursedfiber78.jpg',
-            title: 'Miniatura 2 - Cursedfiber78'
-        }, {
-            src: 'Miniaturas/Miniatura2 - Nephtunie.jpg',
-            title: 'Miniatura 2 - Nephtunie'
-        }, {
-            src: 'Miniaturas/Miniatura3 - Cursedfiber78.jpg',
-            title: 'Miniatura 3 - Cursedfiber78'
-        }, {
-            src: 'Miniaturas/Miniatura3 - Nephtunie.jpg',
-            title: 'Miniatura 3 - Nephtunie'
-        }, {
-            src: 'Miniaturas/Miniatura4 - Nephtunie.jpg',
-            title: 'Miniatura 4 - Nephtunie'
-        }, {
-            src: 'Miniaturas/Miniatura5 - Nephtunie.jpg',
-            title: 'Miniatura 5 - Nephtunie'
-        }];
-
-        // ==========================================
-        // ESTADO GLOBAL DE LOS CARRUSELES
-        // ==========================================
-        let currentIndex = 0;
-        let currentThumbIndex = 0;
-        const PRELOAD_RANGE = 4;
-
-        // ==========================================
-        // INICIALIZACIÓN: Crear el DOM una sola vez
-        // ==========================================
-        function initCarousels() {
-            const vTrack = document.getElementById('carouselTrack');
-            const tTrack = document.getElementById('thumbCarouselTrack');
-
-            if (vTrack) {
-                vTrack.innerHTML = '';
-                verticalVideos.forEach((videoData, index) => {
-                    const card = document.createElement('div');
-                    card.id = `v-card-${index}`;
-                    card.className = 'video-card-3d pos-hidden';
-                    card.innerHTML = `
-                        <video src="${videoData.src}" muted loop playsinline preload="auto"></video>
-                        <div class="card-overlay">
-                            <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
-                        </div>
-                    `;
-                    vTrack.appendChild(card);
-                });
-            }
-
-            if (tTrack) {
-                tTrack.innerHTML = '';
-                thumbnailsData.forEach((thumbData, index) => {
-                    const card = document.createElement('div');
-                    card.id = `t-card-${index}`;
-                    card.className = 'video-card-3d thumb-card-3d pos-hidden';
-                    card.innerHTML = `
-                        <img src="${thumbData.src}" alt="${thumbData.title}" loading="eager">
-                        <div class="card-overlay">
-                            <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
-                        </div>
-                    `;
-                    tTrack.appendChild(card);
-                });
-            }
-
-            updateCarousel();
-            updateThumbCarousel();
-        }
-
-        // ==========================================
-        // LÓGICA DE ANIMACIÓN (VIDEOS VERTICALES)
-        // ==========================================
-        function updateCarousel() {
-            const total = verticalVideos.length;
-
-            verticalVideos.forEach((videoData, index) => {
-                const card = document.getElementById(`v-card-${index}`);
-                if (!card) return;
-
-                const video = card.querySelector('video');
-                let offset = index - currentIndex;
-
-                if (offset > total / 2) offset -= total;
-                if (offset < -total / 2) offset += total;
-
-                card.className = 'video-card-3d';
-
-                if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
-                    if (offset >= -2 && offset <= 2) {
-                        card.classList.add(`pos-${offset}`);
-                    } else {
-                        card.classList.add('pos-hidden');
-                    }
-
-                    if (offset === 0) {
-                        video.play().catch(() => {});
-                        card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
-                    } else {
-                        video.pause();
-                        card.onclick = () => {
-                            currentIndex = (currentIndex + offset + total) % total;
-                            updateCarousel();
-                        };
-                    }
-                } else {
-                    card.classList.add('pos-hidden');
-                    video.pause();
-                }
-            });
-        }
-
-        function moveCarousel(direction) {
-            currentIndex = (currentIndex + direction + verticalVideos.length) % verticalVideos.length;
-            updateCarousel();
-        }
-
-        // ==========================================
-        // LÓGICA DE ANIMACIÓN (MINIATURAS HORIZONTALES)
-        // ==========================================
-        function updateThumbCarousel() {
-            const total = thumbnailsData.length;
-
-            thumbnailsData.forEach((thumbData, index) => {
-                const card = document.getElementById(`t-card-${index}`);
-                if (!card) return;
-
-                let offset = index - currentThumbIndex;
-
-                if (offset > total / 2) offset -= total;
-                if (offset < -total / 2) offset += total;
-
-                card.className = 'video-card-3d thumb-card-3d';
-
-                if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
-                    if (offset >= -1 && offset <= 1) {
-                        card.classList.add(`pos-${offset}`);
-                    } else {
-                        card.classList.add('pos-hidden');
-                    }
-
-                    if (offset === 0) {
-                        card.onclick = () => openImageModal(thumbData.src);
-                    } else {
-                        card.onclick = () => {
-                            currentThumbIndex = (currentThumbIndex + offset + total) % total;
-                            updateThumbCarousel();
-                        };
-                    }
-                } else {
-                    card.classList.add('pos-hidden');
-                }
-            });
-        }
-
-        function moveThumbCarousel(direction) {
-            currentThumbIndex = (currentThumbIndex + direction + thumbnailsData.length) % thumbnailsData.length;
-            updateThumbCarousel();
-        }
-
-        // ==========================================
-        // INICIO Y EVENTOS
-        // ==========================================
-        window.addEventListener('DOMContentLoaded', () => {
-            initCarousels();
-        });
-
-        // ==========================================
-        // MODALES
-        // ==========================================
-        function openModal(youtubeId, title, description, urlYT, urlTK, urlIG, tipo) {
-            const modal = document.getElementById('videoModal');
-            const modalContentBox = document.getElementById('modalContentBox');
-            const iframe = document.getElementById('modalIframe');
-            const imgElement = document.getElementById('modalImage');
-            const container = document.getElementById('modalContainer');
-            const linksContainer = document.getElementById('modalLinksContainer');
-            const videoInfo = modalContentBox.querySelector('.video-info');
-
-            modalContentBox.classList.remove('image-modal-view');
-            if (videoInfo) videoInfo.style.display = 'flex';
-
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = description;
-            document.getElementById('ytLink').href = urlYT;
-            document.getElementById('tkLink').href = urlTK;
-            document.getElementById('igLink').href = urlIG;
-
-            imgElement.style.display = 'none';
-            imgElement.src = '';
-            iframe.style.display = 'block';
-            linksContainer.style.display = 'block';
-
-            container.style.aspectRatio = tipo === 'vertical' ? '9/16' : '16/9';
-
-            if (youtubeId && youtubeId !== '') {
-                iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&fs=1&vq=hd1080`;
-            } else {
-                iframe.src = '';
-            }
-
-            modal.style.display = 'flex';
-        }
-
-        function openImageModal(imageSrc) {
-            const modal = document.getElementById('videoModal');
-            const modalContentBox = document.getElementById('modalContentBox');
-            const iframe = document.getElementById('modalIframe');
-            const imgElement = document.getElementById('modalImage');
-            const container = document.getElementById('modalContainer');
-            const linksContainer = document.getElementById('modalLinksContainer');
-            const videoInfo = modalContentBox.querySelector('.video-info');
-
-            modalContentBox.classList.add('image-modal-view');
-            if (videoInfo) videoInfo.style.display = 'none';
-
-            container.style.aspectRatio = '16/9';
-
-            iframe.style.display = 'none';
-            iframe.src = '';
-            imgElement.style.display = 'block';
-            imgElement.src = imageSrc;
-
-            linksContainer.style.display = 'none';
-
-            modal.style.display = 'flex';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('modalIframe');
-            const imgElement = document.getElementById('modalImage');
-            iframe.src = '';
-            imgElement.src = '';
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
+    <!-- SCRIPT EXTERNO -->
+    <script src="script.js"></script>
 </body>
 
 </html>
