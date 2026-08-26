@@ -334,3 +334,26 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+// Función para crear el universo de estrellas
+function createGalaxy() {
+    const container = document.querySelector('.galaxy-background');
+    if (!container) return;
+
+    // Generar 150 estrellas estáticas repartidas por toda la pantalla
+    for (let i = 0; i < 150; i++) {
+        let star = document.createElement('div');
+        star.className = 'star';
+
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+
+        let size = Math.random() * 2 + 1; // Tamaños entre 1px y 3px
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+
+        star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+
+        container.appendChild(star);
+    }
+}
