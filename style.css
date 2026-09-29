@@ -382,26 +382,77 @@ section {
 /* ======================================================== */
 
 
-/* AVISO DE VIDEOS HORIZONTALES VACÍOS                      */
+/* ESTILOS DE VIDEOS HORIZONTALES (16:9 EN CARRUSEL 3D)     */
 
 
 /* ======================================================== */
 
-.empty-notice-container {
-    width: 100%;
+.horiz-card-3d {
+    width: 480px !important;
+    height: 270px !important;
+    margin-left: -240px !important;
+    margin-top: -135px !important;
+    background-color: #0b0b0b !important;
+}
+
+
+/* Ícono de triangulito de Play en el centro de la imagen */
+
+.play-overlay-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    background: rgba(107, 17, 188, 0.85);
+    border: 2px solid #a855f7;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 250px;
-    text-align: center;
+    color: #ffffff;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s, box-shadow 0.3s;
+    z-index: 4;
+    pointer-events: none;
 }
 
-.empty-notice-text {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #888;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+
+/* Desplazamiento sutil del triángulo para centrado óptico */
+
+.play-overlay-btn i {
+    margin-left: 4px;
+}
+
+
+/* Animaciones al pasar el mouse por la tarjeta central */
+
+.horiz-card-3d.pos-0:hover .play-overlay-btn {
+    transform: translate(-50%, -50%) scale(1.15);
+    background: rgba(145, 70, 255, 0.95);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.9);
+}
+
+.horiz-card-3d.pos-1 {
+    transform: translateX(260px) translateZ(-50px) scale(0.85);
+    z-index: 3;
+    filter: brightness(0.4);
+    opacity: 0.8;
+}
+
+.horiz-card-3d.pos--1 {
+    transform: translateX(-260px) translateZ(-50px) scale(0.85);
+    z-index: 3;
+    filter: brightness(0.4);
+    opacity: 0.8;
+}
+
+.horiz-card-3d img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
 }
 
 

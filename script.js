@@ -14,6 +14,38 @@ const verticalVideos = [
     { id: 'WNc0OXxYL1M', title: 'Resumen Partida Fornite', desc: 'Video de Cursedfiber78 donde se resume una partida de Fornite.', src: 'Verticales/Victoria en Fornite - Cursedfiber78.mp4', yt: 'https://youtube.com', tk: 'https://tiktok.com', ig: 'https://instagram.com' }
 ];
 
+const horizontalVideos = [{
+        title: 'REVIVIMOS BATTLEFRONT 2 en 2026 (ES INCREIBLE)',
+        thumb: 'Horizontales/maxresdefault (1).jpg',
+        url: 'https://youtu.be/X6vzMJW32OA?si=RYocrK_5zOWNtylf'
+    },
+    {
+        title: 'ALGO ANDA MAL CON ESTE CLIENTE… 💀',
+        thumb: 'Horizontales/maxresdefault (2).jpg',
+        url: 'https://youtu.be/XXLw_URiQS8?si=X85_DIz91PFiRew5'
+    },
+    {
+        title: 'ESTE JUEGO DE PESCA ES INCREIBLE - HOW TO FISH',
+        thumb: 'Horizontales/maxresdefault (3).jpg',
+        url: 'https://youtu.be/8dd55Np-GtU?si=5Ee40y7jdxhWCepr'
+    },
+    {
+        title: 'Intente subir a MASTER con un amigo...',
+        thumb: 'Horizontales/maxresdefault (4).jpg',
+        url: 'https://youtu.be/m5kdyatyXIQ?si=yTgJ53mt8MeQN9gd'
+    },
+    {
+        title: 'el JUEGO de SALTAR la CUERDA más EXTRAÑO',
+        thumb: 'Horizontales/maxresdefault (5).jpg',
+        url: 'https://youtu.be/gXDkhT7ir-I?si=Z2nW3u_yzD2E1TNC'
+    },
+    {
+        title: 'NUNCA DEBÍ TRABAJAR EN ESTA GASOLINERA… | Gas Station Case',
+        thumb: 'Horizontales/maxresdefault (6).jpg',
+        url: 'https://youtu.be/6RjmpQdlkG0?si=VJYpCk4oDEzG5Nzv'
+    },
+];
+
 const thumbnailsData = [
     { src: 'Miniaturas/Miniatura1 - Cursedfiber78.jpeg', title: 'Miniatura 1 - Cursedfiber78' },
     { src: 'Miniaturas/Miniatura1 - Nephtunie.jpg', title: 'Miniatura 1 - Nephtunie' },
@@ -28,7 +60,6 @@ const thumbnailsData = [
     { src: 'Miniaturas/Miniatura5 - Nephtunie.jpg', title: 'Miniatura 5 - Nephtunie' },
 ];
 
-// Datos de colaboradores con su nombre de streamer
 const collaborationsData = [
     { name: 'Cursedfiber78', streamer: 'Cursedfiber78', avatar: 'Colaboradores/65f6b207-6fb6-48f1-a4dc-4f2e5586.jpg', twitch: 'https://www.twitch.tv/cursedfiber78' }
 ];
@@ -37,6 +68,7 @@ const collaborationsData = [
 // ESTADO GLOBAL DE LOS CARRUSELES
 // ==========================================
 let currentIndex = 0;
+let currentHorizIndex = 0;
 let currentThumbIndex = 0;
 let currentCollabIndex = 0;
 const PRELOAD_RANGE = 4;
@@ -46,6 +78,7 @@ const PRELOAD_RANGE = 4;
 // ==========================================
 function initCarousels() {
     const vTrack = document.getElementById('carouselTrack');
+    const hTrack = document.getElementById('horizCarouselTrack');
     const tTrack = document.getElementById('thumbCarouselTrack');
     const cTrack = document.getElementById('collabCarouselTrack');
 
@@ -56,12 +89,31 @@ function initCarousels() {
             card.id = `v-card-${index}`;
             card.className = 'video-card-3d pos-hidden';
             card.innerHTML = `
-                <video src="${videoData.src}" muted loop playsinline preload="auto"></video>
+                <video src="${videoData.src}" muted loop playsinline preload="metadata"></video>
                 <div class="card-overlay">
                     <span class="play-pill"><i class="fa-solid fa-play"></i> Ver Video</span>
                 </div>
             `;
             vTrack.appendChild(card);
+        });
+    }
+
+    if (hTrack) {
+        hTrack.innerHTML = '';
+        horizontalVideos.forEach((videoData, index) => {
+            const card = document.createElement('div');
+            card.id = `h-card-${index}`;
+            card.className = 'video-card-3d horiz-card-3d pos-hidden';
+            card.innerHTML = `
+                <img src="${videoData.thumb}" alt="${videoData.title}" loading="lazy">
+                <div class="play-overlay-btn">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="card-overlay">
+                    <span class="play-pill"><i class="fa-brands fa-youtube"></i> Ver en YouTube</span>
+                </div>
+            `;
+            hTrack.appendChild(card);
         });
     }
 
@@ -72,7 +124,7 @@ function initCarousels() {
             card.id = `t-card-${index}`;
             card.className = 'video-card-3d thumb-card-3d pos-hidden';
             card.innerHTML = `
-                <img src="${thumbData.src}" alt="${thumbData.title}" loading="eager">
+                <img src="${thumbData.src}" alt="${thumbData.title}" loading="lazy">
                 <div class="card-overlay">
                     <span class="play-pill"><i class="fa-solid fa-eye"></i> Ver Miniatura</span>
                 </div>
@@ -101,6 +153,7 @@ function initCarousels() {
     }
 
     updateCarousel();
+    updateHorizCarousel();
     updateThumbCarousel();
     updateCollabCarousel();
 }
@@ -126,10 +179,10 @@ function updateCarousel() {
                 card.classList.add('pos-hidden');
             }
             if (offset === 0) {
-                video.play().catch(() => {});
+                if (video) video.play().catch(() => {});
                 card.onclick = () => openModal(videoData.id, videoData.title, videoData.desc, videoData.yt, videoData.tk, videoData.ig, 'vertical');
             } else {
-                video.pause();
+                if (video) video.pause();
                 card.onclick = () => {
                     currentIndex = (currentIndex + offset + total) % total;
                     updateCarousel();
@@ -137,7 +190,7 @@ function updateCarousel() {
             }
         } else {
             card.classList.add('pos-hidden');
-            video.pause();
+            if (video) video.pause();
         }
     });
 }
@@ -145,6 +198,44 @@ function updateCarousel() {
 function moveCarousel(direction) {
     currentIndex = (currentIndex + direction + verticalVideos.length) % verticalVideos.length;
     updateCarousel();
+}
+
+// ==========================================
+// LÓGICA DE ANIMACIÓN (VIDEOS HORIZONTALES)
+// ==========================================
+function updateHorizCarousel() {
+    const total = horizontalVideos.length;
+    horizontalVideos.forEach((videoData, index) => {
+        const card = document.getElementById(`h-card-${index}`);
+        if (!card) return;
+        let offset = index - currentHorizIndex;
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        card.className = 'video-card-3d horiz-card-3d';
+        if (offset >= -PRELOAD_RANGE && offset <= PRELOAD_RANGE) {
+            if (offset >= -1 && offset <= 1) {
+                card.classList.add(`pos-${offset}`);
+            } else {
+                card.classList.add('pos-hidden');
+            }
+            if (offset === 0) {
+                card.onclick = () => window.open(videoData.url, '_blank');
+            } else {
+                card.onclick = () => {
+                    currentHorizIndex = (currentHorizIndex + offset + total) % total;
+                    updateHorizCarousel();
+                };
+            }
+        } else {
+            card.classList.add('pos-hidden');
+        }
+    });
+}
+
+function moveHorizCarousel(direction) {
+    currentHorizIndex = (currentHorizIndex + direction + horizontalVideos.length) % horizontalVideos.length;
+    updateHorizCarousel();
 }
 
 // ==========================================
@@ -289,9 +380,9 @@ function closeModal() {
     const iframe = document.getElementById('modalIframe');
     const imgElement = document.getElementById('modalImage');
 
-    iframe.src = '';
-    imgElement.src = '';
-    modal.style.display = 'none';
+    if (iframe) iframe.src = '';
+    if (imgElement) imgElement.src = '';
+    if (modal) modal.style.display = 'none';
 }
 
 window.onclick = function(event) {
@@ -306,26 +397,19 @@ window.onclick = function(event) {
 // ==========================================
 function generateStars() {
     const container = document.querySelector('.galaxy-background');
-    const numStars = 150; // Cantidad de estrellas (puedes subirlo a 200 o bajarlo a 100)
+    if (!container) return;
+    const numStars = 100;
 
     for (let i = 0; i < numStars; i++) {
         const star = document.createElement('div');
         star.classList.add('static-star');
 
-        // Posición aleatoria en la pantalla (0% a 100%)
         const x = Math.random() * 100;
         const y = Math.random() * 100;
-
-        // Tamaño aleatorio para dar profundidad (entre 1px y 2.5px)
         const size = Math.random() * 1.5 + 1;
-
-        // ANIMACIÓN DESINCRONIZADA
-        // Cada estrella parpadea a diferente velocidad (entre 2s y 5s)
         const duration = Math.random() * 3 + 2;
-        // Cada estrella empieza su parpadeo en diferente momento (retraso de 0s a 5s)
         const delay = Math.random() * 5;
 
-        // Aplicar estilos calculados
         star.style.left = `${x}vw`;
         star.style.top = `${y}vh`;
         star.style.width = `${size}px`;
